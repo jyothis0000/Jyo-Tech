@@ -1,0 +1,127 @@
+- generic [ref=f2e2]:
+  - banner [ref=f2e3]:
+    - navigation [ref=f2e4]:
+      - link "jyo tools" [ref=f2e5] [cursor=pointer]:
+        - /url: /
+      - list [ref=f2e7]:
+        - listitem [ref=f2e8]:
+          - link "Tools" [ref=f2e9] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f2e10]:
+          - link "StackPicker" [ref=f2e11] [cursor=pointer]:
+            - /url: /stackpicker
+        - listitem [ref=f2e12]:
+          - link "WebHarvest" [ref=f2e13] [cursor=pointer]:
+            - /url: /webharvest
+      - link "Add to Chrome" [ref=f2e15] [cursor=pointer]:
+        - /url: "#"
+  - main [ref=f2e16]:
+    - generic [ref=f2e17]:
+      - generic [ref=f2e18]: Chrome Extension
+      - generic [ref=f2e20]:
+        - heading "Harvest website assets and design details." [level=1] [ref=f2e21]: Harvest website assets anddesign details.
+        - paragraph [ref=f2e22]: WebHarvest extracts publicly accessible assets from any page — images, colors, typography, links, metadata, and more — right in your browser.
+        - generic [ref=f2e23]:
+          - link "Add to Chrome" [ref=f2e24] [cursor=pointer]:
+            - /url: https://chrome.google.com/webstore/detail/webharvest/PLACEHOLDER
+          - link "Support" [ref=f2e27] [cursor=pointer]:
+            - /url: /webharvest/support
+    - generic [ref=f2e31]:
+      - generic [ref=f2e32]: 🌾
+      - paragraph [ref=f2e33]: Screenshots coming soon
+    - generic [ref=f2e34]:
+      - generic [ref=f2e35]:
+        - heading "What you can extract" [level=2] [ref=f2e36]
+        - paragraph [ref=f2e37]: All publicly accessible — no scraping or bypassing restrictions.
+      - generic [ref=f2e38]:
+        - generic [ref=f2e39]:
+          - generic [ref=f2e40]: 🖼️
+          - heading "Images" [level=3] [ref=f2e41]
+          - paragraph [ref=f2e42]: View and save all publicly loaded images on the current page.
+        - generic [ref=f2e43]:
+          - generic [ref=f2e44]: ◼
+          - heading "SVGs" [level=3] [ref=f2e45]
+          - paragraph [ref=f2e46]: Extract inline and linked SVG assets for use in your own projects.
+        - generic [ref=f2e47]:
+          - generic [ref=f2e48]: 🎨
+          - heading "Color Palette" [level=3] [ref=f2e49]
+          - paragraph [ref=f2e50]: Extract background, text, border, and brand colors used on the page.
+        - generic [ref=f2e51]:
+          - generic [ref=f2e52]: ✒️
+          - heading "Typography" [level=3] [ref=f2e53]
+          - paragraph [ref=f2e54]: Inspect font families, sizes, weights, and line heights in use.
+        - generic [ref=f2e55]:
+          - generic [ref=f2e56]: 🔗
+          - heading "Links" [level=3] [ref=f2e57]
+          - paragraph [ref=f2e58]: List all internal and external links on the page in one view.
+        - generic [ref=f2e59]:
+          - generic [ref=f2e60]: 🏷️
+          - heading "Metadata" [level=3] [ref=f2e61]
+          - paragraph [ref=f2e62]: Read page title, description, Open Graph tags, and structured data.
+        - generic [ref=f2e63]:
+          - generic [ref=f2e64]: 📄
+          - heading "Page Content" [level=3] [ref=f2e65]
+          - paragraph [ref=f2e66]: Capture headings, paragraphs, and structured text from the page.
+        - generic [ref=f2e67]:
+          - generic [ref=f2e68]: 📦
+          - heading "Other Assets" [level=3] [ref=f2e69]
+          - paragraph [ref=f2e70]: Discover stylesheets, scripts, fonts, and other publicly loaded resources.
+    - generic [ref=f2e72]:
+      - heading "How it works" [level=2] [ref=f2e73]
+      - generic [ref=f2e74]:
+        - generic [ref=f2e75]:
+          - generic [ref=f2e76]: "01"
+          - generic [ref=f2e77]:
+            - heading "Open any website" [level=3] [ref=f2e78]
+            - paragraph [ref=f2e79]: Go to the site whose assets you want to inspect in Chrome.
+        - generic [ref=f2e80]:
+          - generic [ref=f2e81]: "02"
+          - generic [ref=f2e82]:
+            - heading "Click WebHarvest" [level=3] [ref=f2e83]
+            - paragraph [ref=f2e84]: Open the extension from your Chrome toolbar.
+        - generic [ref=f2e85]:
+          - generic [ref=f2e86]: "03"
+          - generic [ref=f2e87]:
+            - heading "Browse and export" [level=3] [ref=f2e88]
+            - paragraph [ref=f2e89]: Navigate through asset categories and copy or save what you need.
+    - generic [ref=f2e91]:
+      - heading "Responsible use" [level=3] [ref=f2e92]
+      - paragraph [ref=f2e93]: WebHarvest only accesses assets that are already publicly loaded in your browser — the same resources your browser downloads to render the page. It does not bypass authentication, paywalls, robots.txt restrictions, or access controls. Always respect website terms of service and copyright when using extracted assets.
+      - link "Read privacy policy →" [ref=f2e94] [cursor=pointer]:
+        - /url: /webharvest/privacy
+    - generic [ref=f2e96]:
+      - heading "Start extracting assets today" [level=2] [ref=f2e97]
+      - paragraph [ref=f2e98]: Free. No sign-up. Works on any public webpage.
+      - link "Add to Chrome" [ref=f2e100] [cursor=pointer]:
+        - /url: https://chrome.google.com/webstore/detail/webharvest/PLACEHOLDER
+  - contentinfo [ref=f2e103]:
+    - generic [ref=f2e104]:
+      - generic [ref=f2e105]:
+        - generic [ref=f2e106]:
+          - paragraph [ref=f2e107]: jyo tools
+          - paragraph [ref=f2e108]: Browser extensions for developers and designers.
+        - generic [ref=f2e109]:
+          - paragraph [ref=f2e110]: StackPicker
+          - list [ref=f2e111]:
+            - listitem [ref=f2e112]:
+              - link "Overview" [ref=f2e113] [cursor=pointer]:
+                - /url: /stackpicker
+            - listitem [ref=f2e114]:
+              - link "Privacy" [ref=f2e115] [cursor=pointer]:
+                - /url: /stackpicker/privacy
+            - listitem [ref=f2e116]:
+              - link "Support" [ref=f2e117] [cursor=pointer]:
+                - /url: /stackpicker/support
+        - generic [ref=f2e118]:
+          - paragraph [ref=f2e119]: WebHarvest
+          - list [ref=f2e120]:
+            - listitem [ref=f2e121]:
+              - link "Overview" [ref=f2e122] [cursor=pointer]:
+                - /url: /webharvest
+            - listitem [ref=f2e123]:
+              - link "Privacy" [ref=f2e124] [cursor=pointer]:
+                - /url: /webharvest/privacy
+            - listitem [ref=f2e125]:
+              - link "Support" [ref=f2e126] [cursor=pointer]:
+                - /url: /webharvest/support
+      - generic [ref=f2e127]: © 2026 Jyothis Manoj. All rights reserved.

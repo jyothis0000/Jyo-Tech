@@ -1,0 +1,89 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - navigation [ref=e4]:
+      - link "jyo tools" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - list [ref=e7]:
+        - listitem [ref=e8]:
+          - link "Tools" [ref=e9] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e10]:
+          - link "StackPicker" [ref=e11] [cursor=pointer]:
+            - /url: /stackpicker
+        - listitem [ref=e12]:
+          - link "WebHarvest" [ref=e13] [cursor=pointer]:
+            - /url: /webharvest
+      - link "Add to Chrome" [ref=e15] [cursor=pointer]:
+        - /url: https://chrome.google.com/webstore/detail/stackpicker/PLACEHOLDER
+  - main [ref=e16]:
+    - generic [ref=e17]:
+      - generic [ref=e18]: Chrome Extensions
+      - heading "Tools for understanding the web." [level=1] [ref=e20]
+      - paragraph [ref=e21]: Simple browser extensions for discovering, inspecting, and extracting useful information from websites.
+    - generic [ref=e23]:
+      - generic [ref=e26]:
+        - generic [ref=e27]: 🔍
+        - heading "StackPicker" [level=2] [ref=e28]
+        - paragraph [ref=e29]: See the technology stack behind any website.
+        - list [ref=e30]:
+          - listitem [ref=e31]: Frontend frameworks & libraries
+          - listitem [ref=e33]: CMS platforms
+          - listitem [ref=e35]: E-commerce solutions
+          - listitem [ref=e37]: Analytics & tracking
+          - listitem [ref=e39]: CDN & hosting
+          - listitem [ref=e41]: Infrastructure
+        - generic [ref=e43]:
+          - link "Add to Chrome" [ref=e44] [cursor=pointer]:
+            - /url: https://chrome.google.com/webstore/detail/stackpicker/PLACEHOLDER
+          - link "Learn more →" [ref=e47] [cursor=pointer]:
+            - /url: /stackpicker
+      - generic [ref=e50]:
+        - generic [ref=e51]: 🌾
+        - heading "WebHarvest" [level=2] [ref=e52]
+        - paragraph [ref=e53]: Harvest website assets, design, content, and publicly accessible data.
+        - list [ref=e54]:
+          - listitem [ref=e55]: Images & SVGs
+          - listitem [ref=e57]: Color palettes
+          - listitem [ref=e59]: Typography details
+          - listitem [ref=e61]: Links & metadata
+          - listitem [ref=e63]: Page content
+          - listitem [ref=e65]: Website assets
+        - generic [ref=e67]:
+          - link "Add to Chrome" [ref=e68] [cursor=pointer]:
+            - /url: https://chrome.google.com/webstore/detail/webharvest/PLACEHOLDER
+          - link "Learn more →" [ref=e71] [cursor=pointer]:
+            - /url: /webharvest
+    - generic [ref=e73]:
+      - paragraph [ref=e74]: Built for developers & designers
+      - paragraph [ref=e75]: Inspect any website. Understand its stack. Extract its assets.
+  - contentinfo [ref=e76]:
+    - generic [ref=e77]:
+      - generic [ref=e78]:
+        - generic [ref=e79]:
+          - paragraph [ref=e80]: jyo tools
+          - paragraph [ref=e81]: Browser extensions for developers and designers.
+        - generic [ref=e82]:
+          - paragraph [ref=e83]: StackPicker
+          - list [ref=e84]:
+            - listitem [ref=e85]:
+              - link "Overview" [ref=e86] [cursor=pointer]:
+                - /url: /stackpicker
+            - listitem [ref=e87]:
+              - link "Privacy" [ref=e88] [cursor=pointer]:
+                - /url: /stackpicker/privacy
+            - listitem [ref=e89]:
+              - link "Support" [ref=e90] [cursor=pointer]:
+                - /url: /stackpicker/support
+        - generic [ref=e91]:
+          - paragraph [ref=e92]: WebHarvest
+          - list [ref=e93]:
+            - listitem [ref=e94]:
+              - link "Overview" [ref=e95] [cursor=pointer]:
+                - /url: /webharvest
+            - listitem [ref=e96]:
+              - link "Privacy" [ref=e97] [cursor=pointer]:
+                - /url: /webharvest/privacy
+            - listitem [ref=e98]:
+              - link "Support" [ref=e99] [cursor=pointer]:
+                - /url: /webharvest/support
+      - generic [ref=e100]: © 2026 Jyothis Manoj. All rights reserved.

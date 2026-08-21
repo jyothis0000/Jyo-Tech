@@ -1,0 +1,128 @@
+- generic [ref=f1e2]:
+  - banner [ref=f1e3]:
+    - navigation [ref=f1e4]:
+      - link "jyo tools" [ref=f1e5] [cursor=pointer]:
+        - /url: /
+      - list [ref=f1e7]:
+        - listitem [ref=f1e8]:
+          - link "Tools" [ref=f1e9] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f1e10]:
+          - link "StackPicker" [ref=f1e11] [cursor=pointer]:
+            - /url: /stackpicker
+        - listitem [ref=f1e12]:
+          - link "WebHarvest" [ref=f1e13] [cursor=pointer]:
+            - /url: /webharvest
+      - link "Add to Chrome" [ref=f1e15] [cursor=pointer]:
+        - /url: https://chrome.google.com/webstore/detail/stackpicker/PLACEHOLDER
+  - main [ref=f1e16]:
+    - generic [ref=f1e17]:
+      - generic [ref=f1e18]: Chrome Extension
+      - generic [ref=f1e20]:
+        - heading "See the tech stack behind any website." [level=1] [ref=f1e21]: See the tech stack behindany website.
+        - paragraph [ref=f1e22]: StackPicker identifies the technologies powering any site — frameworks, libraries, CMS, analytics, infrastructure — all in one click.
+        - generic [ref=f1e23]:
+          - link "Add to Chrome" [ref=f1e24] [cursor=pointer]:
+            - /url: https://chrome.google.com/webstore/detail/stackpicker/PLACEHOLDER
+          - link "Support" [ref=f1e27] [cursor=pointer]:
+            - /url: /stackpicker/support
+    - generic [ref=f1e31]:
+      - generic [ref=f1e32]: 🔍
+      - paragraph [ref=f1e33]: Screenshots coming soon
+    - generic [ref=f1e34]:
+      - generic [ref=f1e35]:
+        - heading "What it detects" [level=2] [ref=f1e36]
+        - paragraph [ref=f1e37]: Identifies technologies across every major category.
+      - generic [ref=f1e38]:
+        - generic [ref=f1e39]:
+          - generic [ref=f1e40]: ⚛️
+          - heading "Frontend Frameworks" [level=3] [ref=f1e41]
+          - paragraph [ref=f1e42]: Detect React, Vue, Angular, Svelte, Next.js, Nuxt, and more with high accuracy.
+        - generic [ref=f1e43]:
+          - generic [ref=f1e44]: 📦
+          - heading "JavaScript Libraries" [level=3] [ref=f1e45]
+          - paragraph [ref=f1e46]: Identify jQuery, Lodash, D3, Three.js, and hundreds of other popular libraries.
+        - generic [ref=f1e47]:
+          - generic [ref=f1e48]: 📝
+          - heading "CMS Platforms" [level=3] [ref=f1e49]
+          - paragraph [ref=f1e50]: Recognise WordPress, Shopify, Webflow, Ghost, Contentful, Sanity, and others.
+        - generic [ref=f1e51]:
+          - generic [ref=f1e52]: 🛒
+          - heading "E-commerce" [level=3] [ref=f1e53]
+          - paragraph [ref=f1e54]: Detect Shopify, WooCommerce, Magento, BigCommerce, and other storefronts.
+        - generic [ref=f1e55]:
+          - generic [ref=f1e56]: 📊
+          - heading "Analytics & Tracking" [level=3] [ref=f1e57]
+          - paragraph [ref=f1e58]: "See what analytics tools are active: GA4, Plausible, Hotjar, Mixpanel, and more."
+        - generic [ref=f1e59]:
+          - generic [ref=f1e60]: ⚡
+          - heading "CDN & Performance" [level=3] [ref=f1e61]
+          - paragraph [ref=f1e62]: Identify content delivery networks, edge platforms, and performance tooling.
+        - generic [ref=f1e63]:
+          - generic [ref=f1e64]: 🖥️
+          - heading "Hosting & Infrastructure" [level=3] [ref=f1e65]
+          - paragraph [ref=f1e66]: Uncover hosting providers, cloud platforms, and server technology.
+        - generic [ref=f1e67]:
+          - generic [ref=f1e68]: 🔧
+          - heading "Other Technologies" [level=3] [ref=f1e69]
+          - paragraph [ref=f1e70]: Tag managers, A/B testing tools, fonts, payment gateways, and more.
+    - generic [ref=f1e72]:
+      - heading "How it works" [level=2] [ref=f1e73]
+      - generic [ref=f1e74]:
+        - generic [ref=f1e75]:
+          - generic [ref=f1e76]: "01"
+          - generic [ref=f1e77]:
+            - heading "Visit any website" [level=3] [ref=f1e78]
+            - paragraph [ref=f1e79]: Navigate to the site you want to inspect in Chrome.
+        - generic [ref=f1e80]:
+          - generic [ref=f1e81]: "02"
+          - generic [ref=f1e82]:
+            - heading "Click the extension icon" [level=3] [ref=f1e83]
+            - paragraph [ref=f1e84]: Open StackPicker from the Chrome toolbar.
+        - generic [ref=f1e85]:
+          - generic [ref=f1e86]: "03"
+          - generic [ref=f1e87]:
+            - heading "See the full stack" [level=3] [ref=f1e88]
+            - paragraph [ref=f1e89]: Technologies are identified and grouped by category instantly.
+    - generic [ref=f1e91]:
+      - generic [ref=f1e92]:
+        - heading "Privacy first" [level=3] [ref=f1e93]
+        - paragraph [ref=f1e94]: StackPicker runs entirely in your browser. No data is sent to external servers. No account required.
+      - link "Read privacy policy →" [ref=f1e95] [cursor=pointer]:
+        - /url: /stackpicker/privacy
+    - generic [ref=f1e97]:
+      - heading "Start inspecting websites today" [level=2] [ref=f1e98]
+      - paragraph [ref=f1e99]: Free. No sign-up. Works instantly.
+      - link "Add to Chrome" [ref=f1e101] [cursor=pointer]:
+        - /url: https://chrome.google.com/webstore/detail/stackpicker/PLACEHOLDER
+  - contentinfo [ref=f1e104]:
+    - generic [ref=f1e105]:
+      - generic [ref=f1e106]:
+        - generic [ref=f1e107]:
+          - paragraph [ref=f1e108]: jyo tools
+          - paragraph [ref=f1e109]: Browser extensions for developers and designers.
+        - generic [ref=f1e110]:
+          - paragraph [ref=f1e111]: StackPicker
+          - list [ref=f1e112]:
+            - listitem [ref=f1e113]:
+              - link "Overview" [ref=f1e114] [cursor=pointer]:
+                - /url: /stackpicker
+            - listitem [ref=f1e115]:
+              - link "Privacy" [ref=f1e116] [cursor=pointer]:
+                - /url: /stackpicker/privacy
+            - listitem [ref=f1e117]:
+              - link "Support" [ref=f1e118] [cursor=pointer]:
+                - /url: /stackpicker/support
+        - generic [ref=f1e119]:
+          - paragraph [ref=f1e120]: WebHarvest
+          - list [ref=f1e121]:
+            - listitem [ref=f1e122]:
+              - link "Overview" [ref=f1e123] [cursor=pointer]:
+                - /url: /webharvest
+            - listitem [ref=f1e124]:
+              - link "Privacy" [ref=f1e125] [cursor=pointer]:
+                - /url: /webharvest/privacy
+            - listitem [ref=f1e126]:
+              - link "Support" [ref=f1e127] [cursor=pointer]:
+                - /url: /webharvest/support
+      - generic [ref=f1e128]: © 2026 Jyothis Manoj. All rights reserved.
