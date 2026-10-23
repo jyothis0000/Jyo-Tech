@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText)
 //   rise    blocks fade up in batches as they enter, once
 //   card    product cards and figures lift into place as whole objects, once
 //   count   a number counts up to its value, once
-//   character  the hero scientist pops in on load, then floats
+//   character  the scientist pops in on load (or on scroll with data-on="scroll"), then floats
 //   depth   hero layers drift apart at different speeds as you leave the hero
 //   progress  a bar that fills with page progress
 const CHAR_SECONDS = 0.045
@@ -89,10 +89,11 @@ export default function ScrollFx() {
         restore.push(() => { el.textContent = text })
       })
 
-      // The scientist pops in with the page, then floats.
+      // The scientist pops in (with the page, or when scrolled to), then floats.
       gsap.utils.toArray<HTMLElement>('[data-fx="character"]').forEach(el => {
-        gsap.timeline()
-          .from(el, { opacity: 0, scale: 0.85, y: 40, duration: 1.2, ease: 'back.out(1.6)', delay: 0.2 })
+        const onScroll = el.dataset.on === 'scroll'
+        gsap.timeline(onScroll ? { scrollTrigger: { trigger: el, start: 'top 85%', once: true } } : {})
+          .from(el, { opacity: 0, scale: 0.85, y: 40, duration: 1.2, ease: 'back.out(1.6)', delay: onScroll ? 0 : 0.2 })
           .to(el, { y: -14, rotate: -1.2, duration: 2.6, ease: 'sine.inOut', repeat: -1, yoyo: true })
       })
 

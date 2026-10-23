@@ -1,3 +1,4 @@
+import makerCharacter from '../assets/maker-character.webp'
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, PORTFOLIO_URL } from '../constants'
 
 const career: [string, string, string][] = [
@@ -18,6 +19,17 @@ export default function Author() {
             Built by Jyothis Manoj.
           </h2>
           <p className="mt-6 font-mono text-sm text-dim">Full-stack and creative web developer</p>
+          <img
+            data-fx="character"
+            data-on="scroll"
+            src={makerCharacter}
+            alt="The lab's cartoon scientist waving from his desk chair, laptop of code and a bubbling flask beside him"
+            width={1061}
+            height={1159}
+            loading="lazy"
+            draggable={false}
+            className="mt-10 w-full max-w-[26rem] select-none"
+          />
         </div>
 
         <div data-fx="rise" className="lg:pt-4">
