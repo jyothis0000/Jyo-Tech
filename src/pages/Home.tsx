@@ -21,8 +21,6 @@ const reasons: [string, string][] = [
   ['Exports your team already uses', 'Results copy straight into a spreadsheet, or save as CSV, JSON or Word for your CRM, catalogue or report.'],
 ]
 
-const line = (i: number) => ({ '--i': i }) as React.CSSProperties
-
 export default function Home() {
   const [extensions, software] = categories
 
@@ -30,23 +28,26 @@ export default function Home() {
     <>
       <PageMeta
         title={SITE_NAME}
-        description="Research and productivity tools by Jyothis Manoj: StackPicker and WebHarvest for Chrome, and Jo, a private AI assistant for Windows."
+        description="StackPicker and WebHarvest for Chrome, and Jo for Windows: small tools by Jyothis Manoj that cut repetitive work."
       />
 
       <section className="relative overflow-hidden">
         <div data-depth="-0.12" className="hero-mesh pointer-events-none absolute inset-0" aria-hidden="true" />
         <div className="relative mx-auto flex min-h-[calc(100svh-3.5rem)] w-full max-w-6xl flex-col justify-end px-4 pb-14 pt-24 sm:px-6 sm:pb-20">
-          <p data-depth="0.08" className="eyebrow">Research and productivity tools</p>
-          <h1 data-depth="0.18" className="display mt-6 text-[clamp(3rem,9vw,8.5rem)]">
-            <span className="rise"><span style={line(0)}>Faster <span style={brandStyle(stackpicker)} className="brand-text">research.</span></span></span>
-            <span className="rise"><span style={line(1)}>Cleaner <span style={brandStyle(webharvest)} className="brand-text">data.</span></span></span>
-            <span className="rise"><span style={line(2)}>Private <span style={brandStyle(jo)} className="brand-text">AI.</span></span></span>
-          </h1>
+          <p data-depth="0.08" className="eyebrow">Chrome extensions and desktop software</p>
+          <div data-depth="0.18">
+            <h1 data-fx="type" data-type-on="load" className="display mt-6 text-[clamp(3rem,9vw,8.5rem)]">
+              <span className="block">Know any <span style={brandStyle(stackpicker)} className="brand-text">website.</span></span>
+              <span className="block">Export any <span style={brandStyle(webharvest)} className="brand-text">page.</span></span>
+              <span className="block">Work <span style={brandStyle(jo)} className="brand-text">faster.</span></span>
+            </h1>
+          </div>
 
           <div data-depth="0.06" className="mt-12 grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
             <p className="max-w-xl text-lg leading-relaxed">
-              Two Chrome extensions that turn any website into answers and spreadsheets, and a Windows assistant
-              that runs AI on your own PC. Built to cut repetitive work, without handing your data to anyone.
+              StackPicker shows what any website is built with. WebHarvest turns any page into a clean spreadsheet.
+              Jo keeps your notes, meetings and Windows settings one sentence away. Small tools, built to cut
+              repetitive work.
             </p>
             <ul className="grid gap-px overflow-hidden rounded-2xl bg-rule sm:grid-cols-2">
               {categories.map((c, i) => (
@@ -97,7 +98,7 @@ export default function Home() {
         <div className="mx-auto w-full max-w-6xl px-4 py-24 sm:px-6 lg:py-32">
           <div className="max-w-3xl">
             <p className="eyebrow">Why teams use them</p>
-            <h2 data-fx="title" className="display mt-4 text-[clamp(2.4rem,5.5vw,4.6rem)]">Less copy-paste. Fewer tabs. Nothing leaked.</h2>
+            <h2 data-fx="type" className="display mt-4 text-[clamp(2.4rem,5.5vw,4.6rem)]">Less copy-paste. Fewer tabs. Nothing leaked.</h2>
           </div>
           <div data-fx="rise" className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-rule md:grid-cols-3">
             {reasons.map(([title, body], i) => (
@@ -121,7 +122,7 @@ function CategoryHead({ index, title, blurb }: { index: number; title: string; b
     <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr] lg:items-end">
       <div>
         <p className="eyebrow">Category 0{index}</p>
-        <h2 data-fx="title" className="display mt-4 text-[clamp(2.6rem,6.5vw,5.8rem)]">{title}</h2>
+        <h2 data-fx="type" className="display mt-4 text-[clamp(2.6rem,6.5vw,5.8rem)]">{title}</h2>
       </div>
       <p data-fx="rise" className="max-w-md leading-relaxed lg:justify-self-end">{blurb}</p>
     </div>
@@ -143,10 +144,8 @@ function UseCases({ p, limit }: { p: Product; limit?: number }) {
 
 function ExtensionCard({ p }: { p: Product }) {
   return (
-    <article style={brandStyle(p)} className="brand brand-wash flex flex-col rounded-[28px] p-3 shadow-[inset_0_0_0_1px_var(--color-rule)] sm:p-4">
-      <div data-fx="figure">
-        <p.Figure fig={p.fig} />
-      </div>
+    <article data-fx="card" style={brandStyle(p)} className="brand brand-wash flex flex-col rounded-[28px] p-3 shadow-[inset_0_0_0_1px_var(--color-rule)] sm:p-4">
+      <p.Figure fig={p.fig} />
       <div className="flex flex-1 flex-col px-3 pb-4 pt-8 sm:px-5">
         <div className="flex items-center gap-3">
           <img src={p.icon} alt="" width={32} height={32} className="h-8 w-8 rounded-lg" />
@@ -170,7 +169,7 @@ function SoftwareFeature({ p }: { p: Product }) {
   return (
     <div style={brandStyle(p)} className="brand brand-wash mt-14">
       <div className="mx-auto grid w-full max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] lg:gap-14 lg:py-24">
-        <div data-fx="figure">
+        <div data-fx="card">
           <p.Figure fig={p.fig} />
         </div>
         <div data-fx="rise" className="lg:pt-6">

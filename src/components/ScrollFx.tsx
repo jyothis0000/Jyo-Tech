@@ -7,33 +7,55 @@ import { SplitText } from 'gsap/SplitText'
 gsap.registerPlugin(ScrollTrigger, SplitText)
 
 // Scroll motion, declared in markup with data-fx:
-//   title   heading lines slide up out of a mask, once
+//   type    the heading types itself out behind a caret: on load (data-type-on="load") or on scroll, once
 //   rise    blocks fade up in batches as they enter, once
-//   figure  the plate opens from a rounded window and grows to full size with the scroll
+//   card    product cards and figures lift into place as whole objects, once
 //   count   a number counts up to its value, once
 //   depth   hero layers drift apart at different speeds as you leave the hero
 //   progress  a bar that fills with page progress
+const CHAR_SECONDS = 0.045
+
+// Types an element's text one character at a time; returns a function that removes the caret.
+function typeIn(el: HTMLElement, { delay = 0, keepCaret = false, scrollTrigger }: { delay?: number; keepCaret?: boolean; scrollTrigger?: ScrollTrigger.Vars }) {
+  const { chars } = SplitText.create(el, { type: 'words,chars' })
+  const caret = document.createElement('span')
+  caret.className = 'caret'
+  caret.setAttribute('aria-hidden', 'true')
+  gsap.set(chars, { visibility: 'hidden' })
+  chars[0]?.before(caret)
+  const tl = gsap.timeline({ delay, scrollTrigger })
+  chars.forEach((char, i) => tl.call(() => {
+    (char as HTMLElement).style.visibility = 'visible'
+    char.after(caret)
+  }, undefined, i * CHAR_SECONDS))
+  if (!keepCaret) tl.to(caret, { autoAlpha: 0, duration: 0.3 }, '+=0.9')
+  return () => caret.remove()
+}
+
 export default function ScrollFx() {
   const { pathname } = useLocation()
 
   useLayoutEffect(() => {
     const mm = gsap.matchMedia()
+    const root = document.documentElement
+    let alive = true
 
-    mm.add('(prefers-reduced-motion: no-preference)', () => {
+    // Split text only once the web fonts are in, so characters measure right; keep typed headings hidden till then.
+    root.classList.add('fx-wait')
+    const fontsIn = Promise.race([document.fonts.ready, new Promise(r => window.setTimeout(r, 1500))])
+    fontsIn.then(() => {
+      if (!alive) return
+      root.classList.remove('fx-wait')
+      start()
+    })
+
+    const start = () => mm.add('(prefers-reduced-motion: no-preference)', () => {
       const restore: (() => void)[] = []
-      gsap.utils.toArray<HTMLElement>('[data-fx="title"]').forEach(el => {
-        SplitText.create(el, {
-          type: 'lines',
-          mask: 'lines',
-          autoSplit: true,
-          onSplit: self => gsap.from(self.lines, {
-            yPercent: 110,
-            duration: 1.1,
-            ease: 'power4.out',
-            stagger: 0.09,
-            scrollTrigger: { trigger: el, start: 'top 88%', once: true },
-          }),
-        })
+      gsap.utils.toArray<HTMLElement>('[data-fx="type"]').forEach(el => {
+        const onLoad = el.dataset.typeOn === 'load'
+        restore.push(typeIn(el, onLoad
+          ? { delay: 0.35, keepCaret: true }
+          : { scrollTrigger: { trigger: el, start: 'top 85%', once: true } }))
       })
 
       gsap.set('[data-fx="rise"]', { opacity: 0, y: 36 })
@@ -43,11 +65,12 @@ export default function ScrollFx() {
         onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, overwrite: true }),
       })
 
-      gsap.utils.toArray<HTMLElement>('[data-fx="figure"]').forEach(el => {
-        gsap.fromTo(el,
-          { clipPath: 'inset(8% 4% 8% 4% round 32px)', scale: 0.94 },
-          { clipPath: 'inset(0% 0% 0% 0% round 20px)', scale: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 35%', scrub: 0.8 } },
-        )
+      // Cards arrive as whole objects: a short lift and fade, side by side ones a beat apart.
+      gsap.set('[data-fx="card"]', { opacity: 0, y: 70 })
+      ScrollTrigger.batch('[data-fx="card"]', {
+        start: 'top 88%',
+        once: true,
+        onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 1.2, ease: 'expo.out', stagger: 0.15, overwrite: true }),
       })
 
       gsap.utils.toArray<HTMLElement>('[data-fx="count"]').forEach(el => {
@@ -81,6 +104,8 @@ export default function ScrollFx() {
     // Figures and web fonts change the page height after first paint.
     const settle = window.setTimeout(() => ScrollTrigger.refresh(), 700)
     return () => {
+      alive = false
+      root.classList.remove('fx-wait')
       window.clearTimeout(settle)
       mm.revert()
       ScrollTrigger.getAll().forEach(t => t.kill())

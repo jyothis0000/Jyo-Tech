@@ -17,7 +17,7 @@ export default function ProductPage({ product: p }: { product: Product }) {
           <img src={p.icon} alt="" width={36} height={36} className="h-9 w-9 rounded-lg" />
           <p className="eyebrow">{p.category === 'extension' ? 'Chrome extensions' : 'Software'} / {p.kind === 'Chrome extension' ? 'Extension' : p.kind} · v{p.version}</p>
         </div>
-        <h1 className="display mt-6 text-[clamp(3.5rem,11vw,9rem)]"><span className="rise"><span className="brand-text">{p.name}</span></span></h1>
+        <h1 data-fx="type" data-type-on="load" className="display mt-6 text-[clamp(3.5rem,11vw,9rem)]"><span className="brand-text">{p.name}</span></h1>
         <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:items-end">
           <div>
             <p className="display text-[clamp(1.6rem,3vw,2.4rem)]">{p.pitch}</p>
@@ -41,7 +41,7 @@ export default function ProductPage({ product: p }: { product: Product }) {
         <div className="mx-auto w-full max-w-6xl px-4 py-20 sm:px-6">
           <div>
             <p className="eyebrow">Who it is for</p>
-            <h2 data-fx="title" className="display mt-4 text-[clamp(2.2rem,5vw,4rem)]">Built for real work</h2>
+            <h2 data-fx="type" className="display mt-4 text-[clamp(2.2rem,5vw,4rem)]">Built for real work</h2>
           </div>
           <ul data-fx="rise" className="mt-12 grid gap-px overflow-hidden rounded-3xl bg-rule sm:grid-cols-2">
             {p.useCases.map(([title, body]) => (
@@ -81,7 +81,7 @@ export default function ProductPage({ product: p }: { product: Product }) {
 
       <section className="border-t border-rule">
         <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
-          <h2 data-fx="title" className="display text-[clamp(2.2rem,5vw,4rem)]">{p.featuresTitle}</h2>
+          <h2 data-fx="type" className="display text-[clamp(2.2rem,5vw,4rem)]">{p.featuresTitle}</h2>
           <dl data-fx="rise" className="mt-10 grid gap-x-14 sm:grid-cols-2">
             {p.features.map(([term, detail]) => (
               <div key={term} className="border-t border-rule py-5">

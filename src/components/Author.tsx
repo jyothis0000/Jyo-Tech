@@ -14,7 +14,7 @@ export default function Author() {
       <div className="mx-auto grid w-full max-w-6xl gap-14 px-4 py-24 sm:px-6 lg:grid-cols-[1fr_1.15fr] lg:py-36">
         <div>
           <p className="eyebrow">About the maker</p>
-          <h2 data-fx="title" className="display mt-6 text-[clamp(2.75rem,6.5vw,6rem)]">
+          <h2 data-fx="type" className="display mt-6 text-[clamp(2.75rem,6.5vw,6rem)]">
             Built by Jyothis Manoj.
           </h2>
           <p className="mt-6 font-mono text-sm text-dim">Full-stack and creative web developer</p>

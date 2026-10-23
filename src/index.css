@@ -198,29 +198,7 @@
     box-shadow: inset 0 0 0 1px var(--color-rule-strong);
   }
 
-  /* Hero lines rise once on load. */
-  .rise {
-    display: block;
-    overflow: hidden;
-    padding-bottom: 0.14em;
-  margin-bottom: -0.08em;
-  }
-
-  .rise > span {
-    display: block;
-    animation: rise 0.9s var(--ease-out) both;
-    animation-delay: calc(var(--i, 0) * 90ms + 100ms);
-  }
-
-  @keyframes rise {
-    from { transform: translateY(105%); }
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .rise > span {
-      animation: none;
-    }
-
     .btn::before {
       transition: none;
     }
@@ -236,3 +214,21 @@
   mask-image: linear-gradient(to bottom, black 55%, transparent);
 }
 
+
+.caret {
+  display: inline-block;
+  width: 0.07em;
+  height: 0.82em;
+  margin-left: 0.04em;
+  vertical-align: -0.04em;
+  background: var(--color-lit);
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+.fx-wait [data-fx="type"] {
+  visibility: hidden;
+}
