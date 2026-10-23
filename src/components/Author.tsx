@@ -7,6 +7,8 @@ export default function Author() {
   return (
     <section id="author" className="scroll-mt-20 border-t border-rule">
       <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-4 py-24 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:py-32">
+        {/* Own wrapper: the hover hop and pointer lean move this box, not the whole section. */}
+        <div className="mx-auto w-full max-w-[24rem] lg:max-w-none">
         <img
           data-fx="character"
           data-on="scroll"
@@ -16,8 +18,9 @@ export default function Author() {
           height={1159}
           loading="lazy"
           draggable={false}
-          className="mx-auto w-full max-w-[24rem] select-none lg:max-w-none"
+          className="w-full select-none"
         />
+        </div>
 
         <div>
           <p className="eyebrow">About the maker</p>
