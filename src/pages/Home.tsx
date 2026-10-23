@@ -32,7 +32,7 @@ export default function Home() {
 
       <section className="relative overflow-hidden">
         <div data-depth="-0.12" className="hero-mesh pointer-events-none absolute inset-0" aria-hidden="true" />
-        <div className="relative mx-auto grid min-h-[calc(100svh-4rem)] w-full max-w-6xl items-end gap-6 px-4 pb-14 pt-16 sm:px-6 sm:pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-4">
+        <div className="relative mx-auto grid min-h-[calc(100svh-5rem)] w-full max-w-6xl items-end gap-6 px-4 pb-14 pt-16 sm:px-6 sm:pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-4">
           <div className="lg:pb-6">
             <p data-depth="0.08" className="eyebrow">{SITE_NAME} · a one-person software lab</p>
             <div data-depth="0.16">
@@ -89,7 +89,7 @@ export default function Home() {
         </dl>
       </section>
 
-      <section id={extensions.key} className="scroll-mt-16">
+      <section id={extensions.key} className="scroll-mt-20">
         <div className="mx-auto w-full max-w-6xl px-4 pb-16 pt-24 sm:px-6 lg:pt-32">
           <CategoryHead index={1} title={extensions.title} blurb={extensions.blurb} />
           <div className="mt-14 grid gap-6 lg:grid-cols-2">
@@ -98,7 +98,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id={software.key} className="scroll-mt-16 border-t border-rule">
+      <section id={software.key} className="scroll-mt-20 border-t border-rule">
         <div className="mx-auto w-full max-w-6xl px-4 pt-24 sm:px-6 lg:pt-32">
           <CategoryHead index={2} title={software.title} blurb={software.blurb} />
         </div>

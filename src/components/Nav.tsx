@@ -12,9 +12,9 @@ export default function Nav() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-rule bg-page/80 backdrop-blur-md">
-      <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
+      <nav className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link to="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
-          <img src={logo} alt={SITE_NAME} width={91} height={56} className="h-14 w-auto" />
+          <img src={logo} alt={SITE_NAME} width={117} height={72} className="h-[72px] w-auto" />
         </Link>
 
         <ul className="hidden items-center gap-8 md:flex">
