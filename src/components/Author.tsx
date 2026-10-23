@@ -1,12 +1,6 @@
 import makerCharacter from '../assets/maker-character.webp'
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, PORTFOLIO_URL } from '../constants'
 
-const career: [string, string, string][] = [
-  ['2022 – now', 'Web Developer', 'Digitalbuddha Info Solutions LLP'],
-  ['2021 – 2022', 'Junior Web Developer (intern)', 'Geniies IT & Services'],
-  ['2020 – 2022', 'MCA', 'RVS CAS, Coimbatore'],
-]
-
 const skills = ['React', 'Next.js', 'Three.js', 'GSAP', 'Node.js', 'MongoDB', 'WordPress', 'AWS']
 
 export default function Author() {
@@ -45,15 +39,6 @@ export default function Author() {
           <ul className="mt-8 flex flex-wrap gap-2">
             {skills.map(s => <li key={s} className="chip">{s}</li>)}
           </ul>
-
-          <ol className="mt-8 border-t border-rule">
-            {career.map(([when, role, where]) => (
-              <li key={role} className="grid grid-cols-[7rem_1fr] gap-4 border-b border-rule py-3.5 text-sm sm:grid-cols-[8.5rem_1fr]">
-                <span className="font-mono text-dim">{when}</span>
-                <span><span className="text-ink">{role}</span> · {where}</span>
-              </li>
-            ))}
-          </ol>
 
           <div className="mt-8 flex flex-wrap gap-3">
             <a href={PORTFOLIO_URL} target="_blank" rel="noopener noreferrer" className="btn btn-brand">
