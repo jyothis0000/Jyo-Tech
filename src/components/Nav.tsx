@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { CONTACT_EMAIL, PORTFOLIO_URL, SITE_NAME } from '../constants'
 import { categories } from '../products'
-import Mark from './Mark'
+import logo from '../assets/jo-labs-logo.webp'
 
 const linkClass = ({ isActive }: { isActive: boolean }) =>
   `text-sm transition-colors ${isActive ? 'text-ink underline decoration-rule-strong underline-offset-[6px]' : 'text-body hover:text-ink'}`
@@ -12,10 +12,9 @@ export default function Nav() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-rule bg-page/80 backdrop-blur-md">
-      <nav className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
+      <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link to="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
-          <Mark />
-          <span className="display text-[15px] tracking-normal">{SITE_NAME}</span>
+          <img src={logo} alt={SITE_NAME} width={91} height={56} className="h-14 w-auto" />
         </Link>
 
         <ul className="hidden items-center gap-8 md:flex">

@@ -5,7 +5,7 @@ const skills = ['React', 'Next.js', 'Three.js', 'GSAP', 'Node.js', 'MongoDB', 'W
 
 export default function Author() {
   return (
-    <section id="author" className="scroll-mt-14 border-t border-rule">
+    <section id="author" className="scroll-mt-16 border-t border-rule">
       <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-4 py-24 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:py-32">
         <img
           data-fx="character"

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import Mark from './Mark'
+import logo from '../assets/jo-labs-logo.webp'
 import SmartLink from './SmartLink'
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, PORTFOLIO_URL, SITE_NAME } from '../constants'
 import { categories } from '../products'
@@ -16,8 +16,7 @@ export default function Footer() {
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 sm:px-6 lg:grid-cols-[1.4fr_1.2fr_0.8fr_0.8fr]">
         <div>
           <Link to="/" className="flex items-center gap-2.5">
-            <Mark />
-            <span className="display text-[17px] tracking-normal">{SITE_NAME}</span>
+            <img src={logo} alt={SITE_NAME} width={130} height={80} loading="lazy" className="h-20 w-auto" />
           </Link>
           <p className="mt-4 text-sm">Tools for the web and the desktop, by Jyothis Manoj.</p>
           <a href={`mailto:${CONTACT_EMAIL}`} className="link mt-1 inline-block text-sm">{CONTACT_EMAIL}</a>
