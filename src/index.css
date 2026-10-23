@@ -232,3 +232,8 @@
 .fx-wait [data-fx="type"] {
   visibility: hidden;
 }
+
+/* The lab's own accent, taken from the character's lightning. */
+.lab-text {
+  color: oklch(0.86 0.17 150);
+}

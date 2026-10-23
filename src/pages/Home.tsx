@@ -4,9 +4,8 @@ import Datasheet from '../components/Datasheet'
 import StoreButton from '../components/StoreButton'
 import Author from '../components/Author'
 import { SITE_NAME } from '../constants'
-import { brandStyle, categories, products, type Product } from '../products'
-
-const [stackpicker, webharvest, jo] = products
+import labCharacter from '../assets/lab-character.webp'
+import { brandStyle, categories, type Product } from '../products'
 
 const proof: [string, string][] = [
   ['3,599', 'technology fingerprints StackPicker can recognise'],
@@ -33,33 +32,45 @@ export default function Home() {
 
       <section className="relative overflow-hidden">
         <div data-depth="-0.12" className="hero-mesh pointer-events-none absolute inset-0" aria-hidden="true" />
-        <div className="relative mx-auto flex min-h-[calc(100svh-3.5rem)] w-full max-w-6xl flex-col justify-end px-4 pb-14 pt-24 sm:px-6 sm:pb-20">
-          <p data-depth="0.08" className="eyebrow">Chrome extensions and desktop software</p>
-          <div data-depth="0.18">
-            <h1 data-fx="type" data-type-on="load" className="display mt-6 text-[clamp(3rem,9vw,8.5rem)]">
-              <span className="block">Know any <span style={brandStyle(stackpicker)} className="brand-text">website.</span></span>
-              <span className="block">Export any <span style={brandStyle(webharvest)} className="brand-text">page.</span></span>
-              <span className="block">Work <span style={brandStyle(jo)} className="brand-text">faster.</span></span>
-            </h1>
+        <div className="relative mx-auto grid min-h-[calc(100svh-3.5rem)] w-full max-w-6xl items-end gap-6 px-4 pb-14 pt-16 sm:px-6 sm:pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-4">
+          <div className="lg:pb-6">
+            <p data-depth="0.08" className="eyebrow">{SITE_NAME} · a one-person software lab</p>
+            <div data-depth="0.16">
+              <h1 data-fx="type" data-type-on="load" className="display mt-6 whitespace-nowrap text-[clamp(2.9rem,5.6vw,5.4rem)]">
+                <span className="block">Experiments</span>
+                <span className="block">that ship</span>
+                <span className="block">as <span className="lab-text">tools.</span></span>
+              </h1>
+            </div>
+
+            <div data-depth="0.06">
+              <p className="mt-9 max-w-md text-lg leading-relaxed">
+                Ideas get built, tested on real work, and released when they save real time.
+              </p>
+              <ul className="mt-9 grid max-w-lg gap-px overflow-hidden rounded-2xl bg-rule sm:grid-cols-2">
+                {categories.map((c, i) => (
+                  <li key={c.key}>
+                    <a href={`#${c.key}`} className="group flex h-full items-baseline gap-4 bg-page px-5 py-4 transition-colors hover:bg-plate">
+                      <span className="eyebrow">0{i + 1}</span>
+                      <span className="font-medium text-ink">{c.title}</span>
+                      <span className="ml-auto font-mono text-sm text-dim">{c.products.length}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
-          <div data-depth="0.06" className="mt-12 grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
-            <p className="max-w-xl text-lg leading-relaxed">
-              StackPicker shows what any website is built with. WebHarvest turns any page into a clean spreadsheet.
-              Jo keeps your notes, meetings and Windows settings one sentence away. Small tools, built to cut
-              repetitive work.
-            </p>
-            <ul className="grid gap-px overflow-hidden rounded-2xl bg-rule sm:grid-cols-2">
-              {categories.map((c, i) => (
-                <li key={c.key}>
-                  <a href={`#${c.key}`} className="group flex h-full items-baseline gap-4 bg-page px-5 py-4 transition-colors hover:bg-plate">
-                    <span className="eyebrow">0{i + 1}</span>
-                    <span className="font-medium text-ink">{c.title}</span>
-                    <span className="ml-auto font-mono text-sm text-dim">{c.products.length}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div data-depth="0.1" className="relative mx-auto w-full max-w-[20rem] sm:max-w-[26rem] lg:max-w-none">
+            <img
+              data-fx="character"
+              src={labCharacter}
+              alt="Cartoon scientist in a lab coat and goggles, holding a bubbling flask, with lightning crackling around him"
+              width={771}
+              height={945}
+              className="w-full select-none"
+              draggable={false}
+            />
           </div>
         </div>
       </section>
