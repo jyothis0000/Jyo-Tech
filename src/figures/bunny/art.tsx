@@ -89,8 +89,8 @@ const DESK = (
     <Solid paths={DESK_ART.label} tone="lo" crease="none" />
     <Line d={DESK_ART.labelLine} tone="faint" />
     <Dots points={DESK_ART.labelScrews} size={0.45} tone="mid" />
-    <FaceText transform={DESK_ART.labelText} size={3.6} tone="lo" anchor="middle">
-      {`Jo ${VERSION}`}
+    <FaceText transform={DESK_ART.labelText} size={3} tone="lo" anchor="middle">
+      {`Bunny ${VERSION}`}
     </FaceText>
   </g>
 )
@@ -349,7 +349,7 @@ const DECK_LINE = (
 )
 
 const LABEL =
-  'Jo AI Assistant as a desk diorama. Jo, a small toy robot with a glowing face screen and an antenna light, peeks over the taskbar ledge of a monitor with its hands on the edge. Beside the monitor stands a mini PC holding the model cartridge, with its network port capped; in front are a keyboard, a mouse on its pad and a control deck with switches for Bluetooth, Wi-Fi and dark mode and sliders for volume and brightness. Asking Jo opens a chat on the screen, a fixed rule runs on the PC, and the matching control on the deck moves.'
+  'Bunny AI Assistant as a desk diorama. Bunny, a small toy robot with a glowing face screen and an antenna light, peeks over the taskbar ledge of a monitor with its hands on the edge. Beside the monitor stands a mini PC holding the model cartridge, with its network port capped; in front are a keyboard, a mouse on its pad and a control deck with switches for Bluetooth, Wi-Fi and dark mode and sliders for volume and brightness. Asking Bunny opens a chat on the screen, a fixed rule runs on the PC, and the matching control on the deck moves.'
 
 export function JoArt() {
   return (

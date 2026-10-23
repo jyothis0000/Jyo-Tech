@@ -1,9 +1,9 @@
-// Jo AI Assistant 1.0.0 as a desk diorama. Pure truth: commands, replies, timings, readout text.
+// Bunny AI Assistant 1.0.0 as a desk diorama. Pure truth: commands, replies, timings, readout text.
 // Sources (read-only): AI Launcher/ROADMAP.md, PRIVACY.md, src/features/assistant/actions.ts,
 // src-tauri/src/actions.rs (reply wording), src/features/settings/theme.ts (Lavender & Mint glow).
 //
 // Parts (real parts, grouped):
-// desk      top slab, 4 feet, groove, 4 corner screws, desk mat, label plate engraved "Jo 1.0.0"
+// desk      top slab, 4 feet, groove, 4 corner screws, desk mat, label plate engraved "Bunny 1.0.0"
 // monitor   stand foot, neck plate + 2 screws, neck, cable clip, case, top vents, bezel recess, glass,
 //           side port with the video plug
 // taskbar   ledge floor, front lip, 2 end caps, 2 cheek brackets, start tile, search, 5 pinned icons,
@@ -13,7 +13,7 @@
 //           title), divider, user bubble, reply bubble + tick, input field, cursor, send button,
 //           reminder bubble with Join and Snooze buttons
 // mouse     pad with stitched edge, shell, button seams, wheel slot, wheel
-// Jo        torso, head, front rim, face screen, 2 eyes + 4 sparkles, 2 blush, smile, 2 ears + tip ring,
+// Bunny        torso, head, front rim, face screen, 2 eyes + 4 sparkles, 2 blush, smile, 2 ears + tip ring,
 //           antenna collar, stalk, status light, glow, 2 hands with finger seams
 // PC        4 feet, case, front bezel, side panel, 2 thumb screws, power button + ring, activity LED,
 //           cartridge slot, model cartridge (body, label plate, grip ribs), eject button, front vents,

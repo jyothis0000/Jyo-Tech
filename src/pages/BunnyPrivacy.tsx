@@ -1,19 +1,19 @@
 import PageMeta from '../components/PageMeta'
 import { CONTACT_EMAIL } from '../constants'
 
-// Mirrors PRIVACY.md in the Jo AI Assistant repo; update both together.
-export default function JoPrivacy() {
+// Mirrors PRIVACY.md in the Bunny AI Assistant repo; update both together.
+export default function BunnyPrivacy() {
   return (
     <>
       <PageMeta
-        title="Jo AI Assistant Privacy Policy"
-        description="What Jo AI Assistant keeps on your PC, and when it uses the internet."
-        path="/jo/privacy"
+        title="Bunny AI Assistant Privacy Policy"
+        description="What Bunny AI Assistant keeps on your PC, and when it uses the internet."
+        path="/bunny/privacy"
       />
 
       <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
         <div className="mb-10">
-          <span className="eyebrow">Jo AI Assistant</span>
+          <span className="eyebrow">Bunny AI Assistant</span>
           <h1 className="mt-2 display text-4xl sm:text-5xl">Privacy Policy</h1>
           <p className="mt-2 text-sm text-dim">Last updated: 22 October 2026</p>
         </div>
@@ -21,8 +21,8 @@ export default function JoPrivacy() {
         <div className="space-y-8">
           <Section title="Overview">
             <p>
-              Jo AI Assistant ("Jo", "the app") is made by Jyothis Manoj. This policy explains what the app does with your
-              information. In short: <strong className="text-ink">Jo works on your PC, keeps your data on your PC, and only sends
+              Bunny AI Assistant ("Bunny", "the app") is made by Jyothis Manoj. This policy explains what the app does with your
+              information. In short: <strong className="text-ink">Bunny works on your PC, keeps your data on your PC, and only sends
               something over the internet when you turn on a feature that needs it.</strong> We do not run servers that receive
               your data, and the app contains no analytics, tracking or advertising.
             </p>
@@ -33,7 +33,7 @@ export default function JoPrivacy() {
               <li><strong className="text-ink">Chats</strong> with the built-in AI model (Qwen2.5 1.5B). The model runs entirely on your computer; your messages are not sent anywhere.</li>
               <li><strong className="text-ink">Chat history, settings and theme</strong> are stored in the app's folder on your PC.</li>
               <li><strong className="text-ink">Notes and note reminders</strong> are stored in <code>notes.json</code> in the app's folder on your PC.</li>
-              <li><strong className="text-ink">Device commands</strong> (Bluetooth, Wi-Fi, volume, brightness, dark mode, lock, screenshots, opening apps and Settings pages) run on your PC. To open apps by name, Jo reads the list of apps in your Start menu locally; that list never leaves your PC.</li>
+              <li><strong className="text-ink">Device commands</strong> (Bluetooth, Wi-Fi, volume, brightness, dark mode, lock, screenshots, opening apps and Settings pages) run on your PC. To open apps by name, Bunny reads the list of apps in your Start menu locally; that list never leaves your PC.</li>
             </ul>
           </Section>
 

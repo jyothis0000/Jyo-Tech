@@ -1,6 +1,6 @@
-# jyo tech
+# Jo Labs
 
-The site for StackPicker, WebHarvest and Jo. React + Vite + Tailwind, deployed on Vercel.
+The site for StackPicker, WebHarvest and Bunny. React + Vite + Tailwind, deployed on Vercel.
 
 ```bash
 npm install

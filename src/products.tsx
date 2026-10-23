@@ -2,12 +2,12 @@ import type { ComponentType, CSSProperties, ReactNode } from 'react'
 import { CHROME_STORE_URL_STACKPICKER, CHROME_STORE_URL_WEBHARVEST, CONTACT_EMAIL } from './constants'
 import stackpickerIcon from './assets/stackpicker-icon.png'
 import webharvestIcon from './assets/webharvest-icon.png'
-import joIcon from './assets/jo-icon.png'
-import joReminder from './assets/jo-reminder.png'
+import bunnyIcon from './assets/bunny-icon.png'
+import bunnyReminder from './assets/bunny-reminder.png'
 
 import StackPickerFigure from './figures/stackpicker/figure'
 import WebHarvestFigure from './figures/webharvest/figure'
-import JoFigure from './figures/jo/figure'
+import BunnyFigure from './figures/bunny/figure'
 
 export interface Product {
   key: string
@@ -136,15 +136,15 @@ export const products: Product[] = [
     ],
   },
   {
-    key: 'jo',
+    key: 'bunny',
     category: 'software',
     brand: ['#a78bfa', '#5eead4'],
-    name: 'Jo',
-    path: '/jo',
+    name: 'Bunny',
+    path: '/bunny',
     fig: 'Fig 3',
     kind: 'Windows app',
     version: '1.0.0',
-    icon: joIcon,
+    icon: bunnyIcon,
     summary: 'A private AI assistant that runs on your own PC.',
     pitch: 'AI on your desk, not in the cloud.',
     lede: 'An AI assistant for Windows that runs entirely on your PC. Ask questions, change settings by typing, take notes and never miss a meeting, without your words leaving the machine.',
@@ -154,7 +154,7 @@ export const products: Product[] = [
       ['Notes and follow-ups', 'Type "remind me at 5pm to call the client" and it becomes a note with a reminder.'],
       ['Hands-free settings', 'Switch Bluetooth, Wi-Fi, volume, brightness or dark mode by typing a sentence.'],
     ],
-    Figure: JoFigure,
+    Figure: BunnyFigure,
     store: { label: 'Coming to the Microsoft Store', platform: 'windows' },
     specs: [
       ['AI model', 'Qwen2.5 1.5B, running on your PC'],
@@ -162,27 +162,27 @@ export const products: Product[] = [
       ['Commands', 'Bluetooth, Wi-Fi, volume, brightness, dark mode, lock, screenshot, open apps'],
       ['Reminders', 'Notes, and Google Calendar meetings 5 to 60 minutes ahead'],
       ['Paid models', 'Optional: OpenAI, Anthropic, Gemini, Groq, OpenRouter'],
-      ['Open chat', 'Click Jo or press Alt+Space'],
+      ['Open chat', 'Click Bunny or press Alt+Space'],
     ],
-    featuresTitle: 'What Jo does',
+    featuresTitle: 'What Bunny does',
     features: [
       ['A character, not a window', 'A 3D toy robot that watches your mouse, blinks, waves for reminders, and can be dragged anywhere along the taskbar.'],
       ['AI on your PC', 'Chats run on your own computer with no account or key. Older messages drop out of its memory on their own.'],
       ['Windows from chat', 'Type "turn on Bluetooth" or "brightness 70%" and fixed rules run it. Questions are offered first, so nothing happens by accident.'],
       ['Notes and reminders', 'A Notes tab with search and autosave. "Remind me at 5pm to call mom" sets one from chat.'],
-      ['Calendar', 'Connect Google Calendar read-only, and Jo rises before each meeting with Join meeting and Snooze.'],
-      ['Themes', 'Lavender and Mint, Coral and Sky, or your own colours, for Jo and the chat.'],
+      ['Calendar', 'Connect Google Calendar read-only, and Bunny rises before each meeting with Join meeting and Snooze.'],
+      ['Themes', 'Lavender and Mint, Coral and Sky, or your own colours, for Bunny and the chat.'],
     ],
     steps: [
-      ['Install', 'On first run Jo downloads its free AI model once, about 1.1 GB.'],
-      ['Ask', 'Click Jo or press Alt+Space and type a question or a command.'],
-      ['Get reminded', 'Add notes or connect your calendar, and Jo rises when it is time.'],
+      ['Install', 'On first run Bunny downloads its free AI model once, about 1.1 GB.'],
+      ['Ask', 'Click Bunny or press Alt+Space and type a question or a command.'],
+      ['Get reminded', 'Add notes or connect your calendar, and Bunny rises when it is time.'],
     ],
-    shot: { src: joReminder, alt: 'Jo rising above the Windows taskbar under a reminder card with Open note and Snooze 5 min buttons', caption: 'A note reminder in the app: Jo rises from the taskbar with Open note and Snooze.' },
-    privacy: 'Chats with the built-in model, notes and settings stay on your PC. Jo goes online only for the one-time model download and for features you turn on, such as a paid model or your calendar.',
+    shot: { src: bunnyReminder, alt: 'Bunny rising above the Windows taskbar under a reminder card with Open note and Snooze 5 min buttons', caption: 'A note reminder in the app: Bunny rises from the taskbar with Open note and Snooze.' },
+    privacy: 'Chats with the built-in model, notes and settings stay on your PC. Bunny goes online only for the one-time model download and for features you turn on, such as a paid model or your calendar.',
     links: [
-      { label: 'Privacy', to: '/jo/privacy' },
-      { label: 'Contact', to: `mailto:${CONTACT_EMAIL}?subject=Jo` },
+      { label: 'Privacy', to: '/bunny/privacy' },
+      { label: 'Contact', to: `mailto:${CONTACT_EMAIL}?subject=Bunny` },
     ],
   },
 ]

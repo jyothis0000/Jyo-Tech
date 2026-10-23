@@ -59,7 +59,8 @@ export default function ScrollFx() {
           : { scrollTrigger: { trigger: el, start: 'top 85%', once: true } }))
       })
 
-      gsap.set('[data-fx="rise"]', { opacity: 0, y: 36 })
+      const rises = gsap.utils.toArray<HTMLElement>('[data-fx="rise"]')
+      if (rises.length) gsap.set(rises, { opacity: 0, y: 36 })
       ScrollTrigger.batch('[data-fx="rise"]', {
         start: 'top 90%',
         once: true,
@@ -67,7 +68,8 @@ export default function ScrollFx() {
       })
 
       // Cards arrive as whole objects: a short lift and fade, side by side ones a beat apart.
-      gsap.set('[data-fx="card"]', { opacity: 0, y: 70 })
+      const cards = gsap.utils.toArray<HTMLElement>('[data-fx="card"]')
+      if (cards.length) gsap.set(cards, { opacity: 0, y: 70 })
       ScrollTrigger.batch('[data-fx="card"]', {
         start: 'top 88%',
         once: true,

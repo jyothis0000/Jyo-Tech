@@ -27,7 +27,7 @@ export default function Home() {
     <>
       <PageMeta
         title={SITE_NAME}
-        description="StackPicker and WebHarvest for Chrome, and Jo for Windows: small tools by Jyothis Manoj that cut repetitive work."
+        description="StackPicker and WebHarvest for Chrome, and Bunny for Windows: small tools by Jyothis Manoj that cut repetitive work."
       />
 
       <section className="relative overflow-hidden">

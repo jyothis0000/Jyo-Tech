@@ -9,7 +9,7 @@ import StackPickerPrivacy from './pages/StackPickerPrivacy'
 import StackPickerSupport from './pages/StackPickerSupport'
 import WebHarvestPrivacy from './pages/WebHarvestPrivacy'
 import WebHarvestSupport from './pages/WebHarvestSupport'
-import JoPrivacy from './pages/JoPrivacy'
+import BunnyPrivacy from './pages/BunnyPrivacy'
 import { products } from './products'
 
 function ScrollToTop() {
@@ -37,7 +37,7 @@ export default function App() {
           <Route path="/stackpicker/support" element={<StackPickerSupport />} />
           <Route path="/webharvest/privacy" element={<WebHarvestPrivacy />} />
           <Route path="/webharvest/support" element={<WebHarvestSupport />} />
-          <Route path="/jo/privacy" element={<JoPrivacy />} />
+          <Route path="/bunny/privacy" element={<BunnyPrivacy />} />
         </Routes>
       </main>
       <Footer />

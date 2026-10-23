@@ -21,7 +21,7 @@ export const LEDGE = { x0: GLASS.x0, x1: GLASS.x1, y0: GLASS_Y, y1: -5.4, floor:
 export const LIP_FRONT = LEDGE.y1
 export const LIP_BACK = LEDGE.y1 - LEDGE.lip
 
-// Jo stands on the ledge floor behind the lip; head and hands show above it. Sizes are the
+// Bunny stands on the ledge floor behind the lip; head and hands show above it. Sizes are the
 // robot model's (head 100 wide) times JS.
 export const JS = 0.432
 export const JX = 54

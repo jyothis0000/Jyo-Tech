@@ -32,7 +32,7 @@ export default function Author() {
             email systems and browser tools, from the first sketch to deployment on AWS.
           </p>
           <p className="mt-5 leading-relaxed">
-            StackPicker, WebHarvest and Jo are my own products. If your team needs a custom extension, an internal
+            StackPicker, WebHarvest and Bunny are my own products. If your team needs a custom extension, an internal
             tool or a website built the same way, my client work and contact details are on my portfolio.
           </p>
 

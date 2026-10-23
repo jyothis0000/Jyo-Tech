@@ -85,7 +85,7 @@ const box = (x0: number, z0: number, x1: number, z1: number, r = 2.6) => {
   return `M${x0 + r} ${-z1}h${w - 2 * r}a${r} ${r} 0 0 1 ${r} ${r}v${z1 - z0 - 2 * r}a${r} ${r} 0 0 1 ${-r} ${r}h${-(w - 2 * r)}a${r} ${r} 0 0 1 ${-r} ${-r}v${-(z1 - z0 - 2 * r)}a${r} ${r} 0 0 1 ${r} ${-r}Z`
 }
 
-// The reminder bubble, with its tail pointing down at Jo's head.
+// The reminder bubble, with its tail pointing down at Bunny's head.
 const TAIL = JX
 const BUBBLE_SHAPE = `M${B.x0 + B.r} ${-B.z1}H${B.x1 - B.r}A${B.r} ${B.r} 0 0 1 ${B.x1} ${-B.z1 + B.r}V${-B.z0 - B.r}A${B.r} ${B.r} 0 0 1 ${B.x1 - B.r} ${-B.z0}H${TAIL + 3.4}L${TAIL} ${-B.z0 + 5}L${TAIL - 3.4} ${-B.z0}H${B.x0 + B.r}A${B.r} ${B.r} 0 0 1 ${B.x0} ${-B.z0 - B.r}V${-B.z1 + B.r}A${B.r} ${B.r} 0 0 1 ${B.x0 + B.r} ${-B.z1}Z`
 const TICK = (x: number, z: number) => `M${x} ${-z}l1.1 1.1 2.2-2.6 .6.5-2.8 3.2-1.7-1.7Z`
@@ -456,7 +456,7 @@ export function JoLive(props: Props) {
       className="jo-fig"
       tabIndex={0}
       role="group"
-      aria-label="Jo AI Assistant on a desk. Enter or Space asks Jo the picked command, and the matching control on the deck moves. Left and Right arrows pick the command."
+      aria-label="Bunny AI Assistant on a desk. Enter or Space asks Bunny the picked command, and the matching control on the deck moves. Left and Right arrows pick the command."
       onPointerEnter={(event) => {
         if (event.pointerType !== 'mouse') return
         state.current.hovering = true
