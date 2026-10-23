@@ -10,11 +10,11 @@ export default function WebHarvestPrivacy() {
         path="/webharvest/privacy"
       />
 
-      <article className="mx-auto max-w-3xl px-6 py-20">
+      <article className="mx-auto max-w-3xl px-4 sm:px-6 py-16 sm:py-20">
         <div className="mb-10">
-          <span className="text-xs uppercase tracking-widest text-emerald-400">WebHarvest</span>
-          <h1 className="mt-2 text-3xl font-bold text-zinc-100">Privacy Policy</h1>
-          <p className="mt-2 text-sm text-zinc-500">Last updated: {new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          <span className="eyebrow">WebHarvest</span>
+          <h1 className="mt-2 display text-4xl sm:text-5xl">Privacy Policy</h1>
+          <p className="mt-2 text-sm text-dim">Last updated: {new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
         </div>
 
         <div className="space-y-8">
@@ -73,7 +73,7 @@ export default function WebHarvestPrivacy() {
 
           <Section title="Contact">
             Questions about this policy? Email us at{' '}
-            <a href={`mailto:${CONTACT_EMAIL}`} className="text-emerald-400 hover:underline">{CONTACT_EMAIL}</a>.
+            <a href={`mailto:${CONTACT_EMAIL}`} className="text-ink hover:underline">{CONTACT_EMAIL}</a>.
           </Section>
         </div>
       </article>
@@ -84,8 +84,8 @@ export default function WebHarvestPrivacy() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h2 className="text-lg font-semibold text-zinc-100 mb-3">{title}</h2>
-      <div className="text-sm leading-relaxed text-zinc-400 space-y-3">{children}</div>
+      <h2 className="text-lg font-semibold text-ink mb-3">{title}</h2>
+      <div className="text-sm leading-relaxed text-body space-y-3">{children}</div>
     </section>
   )
 }

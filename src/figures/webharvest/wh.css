@@ -1,0 +1,213 @@
+.wh-fig {
+  --wh-brand-a: var(--brand-a, #10a37f);
+  --wh-brand-b: var(--brand-b, #a3e635);
+  --wh-glass: #09090a;
+  --wh-tabs: #08080a;
+  --wh-bar: #28282d;
+  --wh-omni: #111113;
+  --wh-page: #161618;
+  --wh-card: #1f1f22;
+  --wh-footer: #101011;
+  --wh-ink: #29292c;
+  --wh-ink-hi: #3c3c40;
+  --wh-price: #77777c;
+  --wh-panel: #1a1a1d;
+  --wh-tile: #28282c;
+  --wh-text: #d6d6d6;
+  --wh-dim: #8a8a8e;
+  border-radius: 10px;
+  cursor: pointer;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.wh-fig:focus {
+  outline: none;
+}
+
+.wh-fig:focus-visible {
+  outline: 1px solid var(--anatomy-muted);
+  outline-offset: 6px;
+}
+
+.wh-stop-a {
+  stop-color: var(--wh-brand-a);
+}
+
+.wh-stop-b {
+  stop-color: var(--wh-brand-b);
+}
+
+.wh-glare-stop {
+  stop-color: #ffffff;
+  stop-opacity: 0.045;
+}
+
+.wh-glare-stop[stop-opacity='0'] {
+  stop-opacity: 0;
+}
+
+.wh-glass { fill: var(--wh-glass); }
+.wh-tabs { fill: var(--wh-tabs); }
+.wh-bar { fill: var(--wh-bar); }
+.wh-omni { fill: var(--wh-omni); }
+.wh-page { fill: var(--wh-page); }
+.wh-card { fill: var(--wh-card); }
+.wh-footer { fill: var(--wh-footer); }
+.wh-ink { fill: var(--wh-ink); }
+.wh-ink-hi { fill: var(--wh-ink-hi); }
+.wh-price { fill: var(--wh-price); }
+.wh-panel { fill: var(--wh-panel); }
+.wh-tile-face { fill: var(--wh-tile); }
+.wh-brand { fill: url(#wh-brand); }
+.wh-lens { fill: #050506; }
+.wh-hole { fill: var(--anatomy-shade-0); }
+.wh-wheel { fill: var(--anatomy-mid); }
+.wh-dot { fill: var(--wh-dim); }
+
+.wh-fig .wh-ui {
+  fill: none;
+  stroke: var(--wh-dim);
+  stroke-width: 0.6px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.wh-icon {
+  fill: color-mix(in srgb, var(--wh-brand-a) 22%, var(--wh-bar));
+}
+
+.wh-mark-leaf {
+  fill: url(#wh-brand);
+}
+
+.wh-fig .wh-mark-stem {
+  fill: none;
+  stroke: var(--wh-brand-a);
+  stroke-width: 0.9px;
+  stroke-linecap: round;
+}
+
+.wh-text {
+  fill: var(--wh-text);
+  font-family: var(--anatomy-mono);
+  letter-spacing: 0.02em;
+}
+
+.wh-dim {
+  fill: var(--wh-dim);
+}
+
+.wh-url {
+  fill: var(--wh-dim);
+}
+
+.wh-button-ink {
+  fill: #06140e;
+  font-family: var(--anatomy-mono);
+}
+
+.wh-fig .wh-button-icon {
+  fill: none;
+  stroke: #06140e;
+  stroke-width: 0.7px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.wh-button[data-on] > .wh-brand {
+  opacity: 0.78;
+}
+
+/* A source on the page lights while its token lifts out. */
+[data-src] .iso-line,
+[data-src] .wh-ui {
+  transition: stroke 0.25s var(--anatomy-ease);
+}
+
+[data-src][data-on] .iso-line,
+[data-src][data-on] .wh-ui {
+  stroke: var(--anatomy-lit);
+}
+
+[data-src][data-on] .wh-ink-hi {
+  fill: #6a6a70;
+}
+
+/* Tiles: selected (hover or arrows) in the brand colour, a short flash when a token lands. */
+.wh-tile .wh-tile-face,
+.wh-tile .wh-tile-edge {
+  transition: fill 0.3s var(--anatomy-ease), stroke 0.3s var(--anatomy-ease);
+}
+
+.wh-tile[data-hit] .wh-tile-edge {
+  stroke: var(--anatomy-hi);
+}
+
+.wh-tile[data-on] .wh-tile-face {
+  fill: color-mix(in srgb, var(--wh-brand-a) 26%, var(--wh-tile));
+}
+
+.wh-tile[data-on] .wh-tile-edge {
+  stroke: var(--wh-brand-b);
+}
+
+.wh-tile[data-on] .wh-tile-name {
+  fill: var(--wh-text);
+}
+
+.wh-export[data-on] .wh-tile-edge {
+  stroke: var(--wh-brand-b);
+}
+
+.wh-void {
+  fill: var(--wh-glass);
+}
+
+/* The token in flight is the one lit part, in the extension's colour. */
+.wh-token[data-lit] .iso-fill,
+.wh-token[data-lit] .iso-shade {
+  fill: color-mix(in srgb, var(--wh-brand-a) 30%, var(--anatomy-face));
+}
+
+.wh-token[data-lit] .iso-top {
+  fill: color-mix(in srgb, var(--wh-brand-b) 34%, var(--anatomy-face));
+}
+
+.wh-token[data-lit] .iso-edge {
+  stroke: var(--wh-brand-b);
+}
+
+.wh-token[data-lit] .iso-line[data-tone='mid'] {
+  stroke: color-mix(in srgb, var(--wh-brand-b) 70%, white);
+}
+
+.wh-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .wh-fig {
+    overflow: hidden;
+  }
+
+  .iso-plate .wh-fig .iso-svg {
+    width: 114%;
+    margin: -3% -7% -2%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-src] .iso-line,
+  .wh-tile .wh-tile-face,
+  .wh-tile .wh-tile-edge {
+    transition: none;
+  }
+}

@@ -10,11 +10,11 @@ export default function StackPickerPrivacy() {
         path="/stackpicker/privacy"
       />
 
-      <article className="mx-auto max-w-3xl px-6 py-20">
+      <article className="mx-auto max-w-3xl px-4 sm:px-6 py-16 sm:py-20">
         <div className="mb-10">
-          <span className="text-xs uppercase tracking-widest text-indigo-400">StackPicker</span>
-          <h1 className="mt-2 text-3xl font-bold text-zinc-100">Privacy Policy</h1>
-          <p className="mt-2 text-sm text-zinc-500">Last updated: {new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          <span className="eyebrow">StackPicker</span>
+          <h1 className="mt-2 display text-4xl sm:text-5xl">Privacy Policy</h1>
+          <p className="mt-2 text-sm text-dim">Last updated: {new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
         </div>
 
         <div className="prose prose-zinc prose-invert space-y-8">
@@ -65,7 +65,7 @@ export default function StackPickerPrivacy() {
 
           <Section title="Contact">
             Questions about this policy? Email us at{' '}
-            <a href={`mailto:${CONTACT_EMAIL}`} className="text-indigo-400 hover:underline">{CONTACT_EMAIL}</a>.
+            <a href={`mailto:${CONTACT_EMAIL}`} className="text-ink hover:underline">{CONTACT_EMAIL}</a>.
           </Section>
         </div>
       </article>
@@ -76,8 +76,8 @@ export default function StackPickerPrivacy() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h2 className="text-lg font-semibold text-zinc-100 mb-3">{title}</h2>
-      <div className="text-sm leading-relaxed text-zinc-400 space-y-3">{children}</div>
+      <h2 className="text-lg font-semibold text-ink mb-3">{title}</h2>
+      <div className="text-sm leading-relaxed text-body space-y-3">{children}</div>
     </section>
   )
 }
