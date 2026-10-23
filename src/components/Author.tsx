@@ -11,16 +11,16 @@ const skills = ['React', 'Next.js', 'Three.js', 'GSAP', 'Node.js', 'MongoDB', 'W
 export default function Author() {
   return (
     <section id="author" className="scroll-mt-14 border-t border-rule">
-      <div data-fx="rise" className="mx-auto grid w-full max-w-6xl gap-14 px-4 py-24 sm:px-6 lg:grid-cols-[1fr_1.15fr] lg:py-36">
+      <div className="mx-auto grid w-full max-w-6xl gap-14 px-4 py-24 sm:px-6 lg:grid-cols-[1fr_1.15fr] lg:py-36">
         <div>
           <p className="eyebrow">About the maker</p>
-          <h2 className="display mt-6 text-[clamp(2.75rem,6.5vw,6rem)]">
-            Built by <span className="author-name">Jyothis Manoj.</span>
+          <h2 data-fx="title" className="display mt-6 text-[clamp(2.75rem,6.5vw,6rem)]">
+            Built by Jyothis Manoj.
           </h2>
           <p className="mt-6 font-mono text-sm text-dim">Full-stack and creative web developer</p>
         </div>
 
-        <div className="lg:pt-4">
+        <div data-fx="rise" className="lg:pt-4">
           <p className="text-xl leading-relaxed text-ink">
             I design and build software end to end: e-commerce stores, dashboards, 3D and AR product experiences,
             email systems and browser tools, from the first sketch to deployment on AWS.
@@ -44,7 +44,7 @@ export default function Author() {
           </ol>
 
           <div className="mt-10 flex flex-wrap gap-3">
-            <a href={PORTFOLIO_URL} target="_blank" rel="noopener noreferrer" className="btn btn-brand author-cta">
+            <a href={PORTFOLIO_URL} target="_blank" rel="noopener noreferrer" className="btn btn-brand">
               See my portfolio ↗
             </a>
             <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="btn btn-line">GitHub</a>

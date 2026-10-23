@@ -107,11 +107,9 @@
     color: var(--color-dim);
   }
 
+  /* Brand colour for words: one solid, lightened tone, never a gradient. */
   .brand-text {
-    background: linear-gradient(100deg, var(--brand-a), var(--brand-b));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: color-mix(in oklch, var(--brand-a) 72%, white);
   }
 
   .brand-wash {
@@ -159,7 +157,7 @@
 
   .btn-brand {
     color: oklch(0.16 0.02 265);
-    background: linear-gradient(100deg, var(--brand-a, var(--color-ink)), var(--brand-b, var(--color-lit)));
+    background: color-mix(in oklch, var(--brand-a, var(--color-ink)) 72%, white);
   }
 
   .btn-brand::before {
@@ -229,24 +227,6 @@
   }
 }
 
-/* All three brands at once: the author's name and the hero. */
-.spectrum {
-  --brand-a: #6366f1;
-  --brand-b: #5eead4;
-}
-
-.author-name,
-.hero-grad {
-  background: linear-gradient(100deg, #818cf8, #34d399 45%, #a78bfa 75%, #5eead4);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.author-cta {
-  --brand-a: #818cf8;
-  --brand-b: #5eead4;
-}
 
 .hero-mesh {
   background:
@@ -256,7 +236,3 @@
   mask-image: linear-gradient(to bottom, black 55%, transparent);
 }
 
-.brand-progress {
-  background: linear-gradient(90deg, #818cf8, #34d399, #a78bfa, #5eead4);
-  transform: scaleX(0);
-}

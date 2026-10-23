@@ -34,16 +34,16 @@ export default function Home() {
       />
 
       <section className="relative overflow-hidden">
-        <div className="hero-mesh pointer-events-none absolute inset-0" aria-hidden="true" />
-        <div data-fx="hero" className="relative mx-auto flex min-h-[calc(100svh-3.5rem)] w-full max-w-6xl flex-col justify-end px-4 pb-14 pt-24 sm:px-6 sm:pb-20">
-          <p className="eyebrow">Research and productivity tools</p>
-          <h1 className="display mt-6 text-[clamp(3rem,9vw,8.5rem)]">
+        <div data-depth="-0.12" className="hero-mesh pointer-events-none absolute inset-0" aria-hidden="true" />
+        <div className="relative mx-auto flex min-h-[calc(100svh-3.5rem)] w-full max-w-6xl flex-col justify-end px-4 pb-14 pt-24 sm:px-6 sm:pb-20">
+          <p data-depth="0.08" className="eyebrow">Research and productivity tools</p>
+          <h1 data-depth="0.18" className="display mt-6 text-[clamp(3rem,9vw,8.5rem)]">
             <span className="rise"><span style={line(0)}>Faster <span style={brandStyle(stackpicker)} className="brand-text">research.</span></span></span>
             <span className="rise"><span style={line(1)}>Cleaner <span style={brandStyle(webharvest)} className="brand-text">data.</span></span></span>
             <span className="rise"><span style={line(2)}>Private <span style={brandStyle(jo)} className="brand-text">AI.</span></span></span>
           </h1>
 
-          <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div data-depth="0.06" className="mt-12 grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
             <p className="max-w-xl text-lg leading-relaxed">
               Two Chrome extensions that turn any website into answers and spreadsheets, and a Windows assistant
               that runs AI on your own PC. Built to cut repetitive work, without handing your data to anyone.
@@ -69,7 +69,7 @@ export default function Home() {
             <div key={label} data-fx="rise" className={`py-8 pr-6 ${i % 2 ? 'pl-6 border-l border-rule' : ''} lg:border-l lg:border-rule lg:pl-6 ${i === 0 ? 'lg:border-l-0 lg:pl-0' : ''}`}>
               <dt className="sr-only">{label}</dt>
               <dd>
-                <span className="display block text-[clamp(2.2rem,4vw,3.4rem)]">{value}</span>
+                <span data-fx="count" className="display block text-[clamp(2.2rem,4vw,3.4rem)] tabular-nums">{value}</span>
                 <span className="mt-2 block text-sm leading-snug">{label}</span>
               </dd>
             </div>
@@ -95,9 +95,9 @@ export default function Home() {
 
       <section className="border-t border-rule">
         <div className="mx-auto w-full max-w-6xl px-4 py-24 sm:px-6 lg:py-32">
-          <div data-fx="rise" className="max-w-3xl">
+          <div className="max-w-3xl">
             <p className="eyebrow">Why teams use them</p>
-            <h2 className="display mt-4 text-[clamp(2.4rem,5.5vw,4.6rem)]">Less copy-paste. Fewer tabs. Nothing leaked.</h2>
+            <h2 data-fx="title" className="display mt-4 text-[clamp(2.4rem,5.5vw,4.6rem)]">Less copy-paste. Fewer tabs. Nothing leaked.</h2>
           </div>
           <div data-fx="rise" className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-rule md:grid-cols-3">
             {reasons.map(([title, body], i) => (
@@ -118,12 +118,12 @@ export default function Home() {
 
 function CategoryHead({ index, title, blurb }: { index: number; title: string; blurb: string }) {
   return (
-    <div data-fx="rise" className="grid gap-6 lg:grid-cols-[1.3fr_1fr] lg:items-end">
+    <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr] lg:items-end">
       <div>
         <p className="eyebrow">Category 0{index}</p>
-        <h2 className="display mt-4 text-[clamp(2.6rem,6.5vw,5.8rem)]">{title}</h2>
+        <h2 data-fx="title" className="display mt-4 text-[clamp(2.6rem,6.5vw,5.8rem)]">{title}</h2>
       </div>
-      <p className="max-w-md leading-relaxed lg:justify-self-end">{blurb}</p>
+      <p data-fx="rise" className="max-w-md leading-relaxed lg:justify-self-end">{blurb}</p>
     </div>
   )
 }
