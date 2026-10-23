@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText)
 //   rise    blocks fade up in batches as they enter, once
 //   card    product cards and figures lift into place as whole objects, once
 //   count   a number counts up to its value, once
-//   character  the scientist pops in on load (or on scroll with data-on="scroll"), then floats
+//   character  the scientist pops in on load (or on scroll with data-on="scroll"), idles, leans to the pointer
 //   depth   hero layers drift apart at different speeds as you leave the hero
 //   progress  a bar that fills with page progress
 const CHAR_SECONDS = 0.045
@@ -89,12 +89,46 @@ export default function ScrollFx() {
         restore.push(() => { el.textContent = text })
       })
 
-      // The scientist pops in (with the page, or when scrolled to), then floats.
+      // The scientist pops in (with the page, or when scrolled to), then idles: a bob, a sway and a breath on
+      // different clocks so it never looks looped, leans toward the pointer, and does a little jig when touched.
       gsap.utils.toArray<HTMLElement>('[data-fx="character"]').forEach(el => {
         const onScroll = el.dataset.on === 'scroll'
+        const holder = el.parentElement ?? el
+        gsap.set(el, { transformOrigin: '50% 90%' })
         gsap.timeline(onScroll ? { scrollTrigger: { trigger: el, start: 'top 85%', once: true } } : {})
           .from(el, { opacity: 0, scale: 0.85, y: 40, duration: 1.2, ease: 'back.out(1.6)', delay: onScroll ? 0 : 0.2 })
-          .to(el, { y: -14, rotate: -1.2, duration: 2.6, ease: 'sine.inOut', repeat: -1, yoyo: true })
+          .add(() => {
+            gsap.to(el, { y: -12, duration: 2.4, ease: 'sine.inOut', repeat: -1, yoyo: true })
+            gsap.fromTo(el, { rotate: -1.4 }, { rotate: 1.4, duration: 3.4, ease: 'sine.inOut', repeat: -1, yoyo: true })
+            gsap.to(el, { scaleY: 1.012, scaleX: 0.996, duration: 1.7, ease: 'sine.inOut', repeat: -1, yoyo: true })
+          })
+
+        if (window.matchMedia('(pointer: fine)').matches) {
+          gsap.set(holder, { transformPerspective: 900 })
+          const turnY = gsap.quickTo(holder, 'rotationY', { duration: 0.8, ease: 'power3.out' })
+          const turnX = gsap.quickTo(holder, 'rotationX', { duration: 0.8, ease: 'power3.out' })
+          const lean = (e: PointerEvent) => {
+            const box = holder.getBoundingClientRect()
+            turnY(gsap.utils.clamp(-1, 1, (e.clientX - (box.left + box.width / 2)) / window.innerWidth * 2) * 7)
+            turnX(gsap.utils.clamp(-1, 1, (e.clientY - (box.top + box.height / 2)) / window.innerHeight * 2) * -5)
+          }
+          window.addEventListener('pointermove', lean)
+          restore.push(() => window.removeEventListener('pointermove', lean))
+        }
+
+        // yPercent and rotate stay clear of the scroll parallax (y) and the pointer lean (rotationX/Y).
+        let jigging = false
+        const jig = () => {
+          if (jigging) return
+          jigging = true
+          gsap.timeline({ onComplete: () => { jigging = false } })
+            .to(holder, { yPercent: -3, duration: 0.18, ease: 'power2.out' })
+            .to(holder, { yPercent: 0, duration: 0.5, ease: 'bounce.out' })
+            .fromTo(holder, { rotate: 0 }, { keyframes: { rotate: [-4, 3.5, -2.5, 1.5, 0] }, duration: 0.7, ease: 'none' }, 0)
+        }
+        el.addEventListener('pointerenter', jig)
+        el.addEventListener('click', jig)
+        restore.push(() => { el.removeEventListener('pointerenter', jig); el.removeEventListener('click', jig) })
       })
 
       gsap.utils.toArray<HTMLElement>('[data-depth]').forEach(el => {
