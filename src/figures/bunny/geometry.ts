@@ -21,8 +21,6 @@ import {
 import * as G from '../../components/iso/lathe.mjs'
 import { tubePieces } from '../../components/iso/tube.mjs'
 import {
-  ANTENNA,
-  BALL,
   BUBBLE,
   CASE,
   CHAT,
@@ -31,13 +29,12 @@ import {
   DECK_Z,
   DESK,
   DESK_H,
-  FACE_Y,
+  EAR,
+  EAR_TOP,
   FOOT_H,
   FRONT,
   GLASS,
   GLASS_Y,
-  HAND,
-  HANDS,
   HEAD,
   HEAD_MID,
   JS,
@@ -50,6 +47,7 @@ import {
   LIP_FRONT,
   NECK,
   P,
+  PAW,
   PC,
   PC_BEZEL,
   PC_FACE,
@@ -233,43 +231,152 @@ export const LEDGE_ART = {
 // Bunny ---------------------------------------------------------------------------------------------
 
 export const HEAD_Y = (HEAD.y0 + HEAD.y1) / 2
-export const FACE = { x0: JX - 33 * JS, x1: JX + 33 * JS, z0: HEAD_MID + (1 - 22) * JS, z1: HEAD_MID + (1 + 22) * JS, r: 18 * JS }
-export const EAR = (side: number) => G.frameAlong([JX + side * (HEAD.x1 - JX), HEAD_Y, HEAD_MID], [side, 0, 0])
-export const ELLIPSOID = Array.from({ length: 25 }, (_, index) => {
-  const s = -HAND.a + (2 * HAND.a * index) / 24
-  return [s, HAND.b * Math.sqrt(Math.max(0, 1 - (s / HAND.a) ** 2)), 1]
+const fix = (value: number) => Math.round(value * 100) / 100
+
+// An ellipse in the (x, z) plane: centre, half-length along a lean from vertical (radians, + toward
+// +x), half-width across it. Ears and their inner panels are made of these.
+const ellipse = (cx: number, cz: number, half: number, across: number, lean: number, count = 40) =>
+  Array.from({ length: count }, (_, index) => {
+    const t = (2 * Math.PI * index) / count
+    const [a, b] = [Math.cos(t) * across, Math.sin(t) * half]
+    return [cx + a * Math.cos(lean) + b * Math.sin(lean), cz - a * Math.sin(lean) + b * Math.cos(lean)]
+  })
+const faceOf = (points: number[][]) => pathOf(points.map(([x, z]) => [fix(x!), fix(-z!)] as Flat), true)
+
+// A groove or whisker that tapers to nothing (at both ends, or from its root to its tip): a thin
+// filled sliver along screen points, so it fades out on the face instead of stopping.
+function sliver(points: Flat[], width: number, root = false) {
+  const left: Flat[] = []
+  const right: Flat[] = []
+  points.forEach((point, index) => {
+    const a = points[Math.max(0, index - 1)]!
+    const b = points[Math.min(points.length - 1, index + 1)]!
+    const length = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1
+    const t = index / (points.length - 1)
+    const half = (width / 2) * (root ? 1 - t : Math.sin(Math.PI * t))
+    const [nx, ny] = [-(b[1] - a[1]) / length, (b[0] - a[0]) / length]
+    left.push([fix(point[0] + nx * half), fix(point[1] + ny * half)])
+    right.push([fix(point[0] - nx * half), fix(point[1] - ny * half)])
+  })
+  return pathOf([...left, ...right.reverse()], true)
+}
+const line = (from: Flat, to: Flat, count = 8) =>
+  Array.from({ length: count + 1 }, (_, i) => [from[0] + ((to[0] - from[0]) * i) / count, from[1] + ((to[1] - from[1]) * i) / count] as Flat)
+
+// Ears: the left one stands with a slight outward lean; the right one leans out and its tip bends
+// over further, a separate piece whose root hides inside the lower ear.
+interface EarPiece {
+  cx: number
+  cz: number
+  half: number
+  across: number
+  lean: number
+}
+const EAR_HALF = (EAR_TOP - EAR.base) / 2
+const along = (x: number, z: number, lean: number, by: number): Flat => [x + by * Math.sin(lean), z + by * Math.cos(lean)]
+const piece = (from: Flat, half: number, across: number, lean: number): EarPiece => {
+  const [cx, cz] = along(from[0], from[1], lean, half)
+  return { cx, cz, half, across, lean }
+}
+const LEFT_EAR = piece([JX - 7.4, EAR.base], EAR_HALF, EAR.w / 2, -0.16)
+const RIGHT_LOW = piece([JX + 7.4, EAR.base], 15, EAR.w / 2, 0.12)
+const JOINT = along(JX + 7.4, EAR.base, 0.12, 23)
+const RIGHT_TIP = piece(along(JOINT[0], JOINT[1], 0.5, -4), 11, EAR.w * 0.47, 0.5)
+const earSolid = (ear: EarPiece) => turned(G.prismOf(ALONG_Y(0), ellipse(ear.cx, ear.cz, ear.half, ear.across, ear.lean), EAR.y0, EAR.y1, P))
+// The inner panel runs from inside the head up to just short of the tip.
+const panelOf = (ear: EarPiece, share: number, lift: number) => {
+  const [cx, cz] = along(ear.cx, ear.cz, ear.lean, lift)
+  return ellipse(cx, cz, ear.half * share, ear.across * 0.56, ear.lean)
+}
+const tipOf = (ear: EarPiece, by: number): Point3 => {
+  const [x, z] = along(ear.cx, ear.cz, ear.lean, by)
+  return [x, EAR.y1, z]
+}
+// The status light: a small glass bead at the top of each inner-ear panel.
+const BEAD_R = 1.5
+const earOf = (pieces: EarPiece[], panels: number[][][], bead: Point3, pivot: Point3) => ({
+  solids: pieces.map(earSolid),
+  panels: panels.map(faceOf),
+  beadAt: at(bead),
+  beadLit: at(G.add3(bead, G.mul3(G.lightOf(P), BEAD_R * 0.55)) as Point3),
+  pivot: at(pivot),
 })
-const SMILE_Z = -(HEAD_MID - 7 * JS)
-const handR = (s: number) => HAND.b * Math.sqrt(Math.max(0, 1 - (s / HAND.a) ** 2))
-const handSlope = (s: number) => (-HAND.b * s) / (HAND.a * HAND.a * Math.sqrt(Math.max(1e-6, 1 - (s / HAND.a) ** 2)))
+
+// Paws: half-ellipsoids along a line that leans down over the lip's front edge, lifted just clear
+// of the lip's top and its front corner.
+const PAW_DIR = G.unit3([0, 1, -0.25]) as Point3
+const pawR = (s: number) => PAW.b * Math.sqrt(Math.max(0, 1 - (s / PAW.a) ** 2))
+const PAW_Z = (() => {
+  const low = Math.sqrt(PAW.a ** 2 * PAW_DIR[2] ** 2 + PAW.b ** 2 * (1 - PAW_DIR[2] ** 2))
+  for (let z = LEDGE.top + low; z < LEDGE.top + 20; z += 0.02) {
+    const [dy, dz] = [LIP_FRONT - PAW.y, LEDGE.top - z]
+    const s = dy * PAW_DIR[1] + dz * PAW_DIR[2]
+    if (Math.abs(s) >= PAW.a || dy * dy + dz * dz - s * s >= pawR(s) ** 2 + 0.04) return z
+  }
+  return LEDGE.top + 20
+})()
+const PAWS: Point3[] = [-1, 1].map((side) => [JX + side * PAW.dx, PAW.y, PAW_Z] as Point3)
+const PAW_PROFILE = Array.from({ length: 25 }, (_, index) => {
+  const s = -PAW.a + (2 * PAW.a * index) / 24
+  return [s, pawR(s), 1]
+})
+// Two toe grooves over the top of each paw, from mid-paw over the front, tapering out at both ends.
+const toesOf = (centre: Point3) => {
+  const F = G.frameAlong(centre, PAW_DIR)
+  return join(
+    [-0.3, 0.3].map((offset) => {
+      const points: Flat[] = []
+      for (let i = 0; i <= 14; i++) {
+        const s = PAW.a * (0.4 + (0.58 * i) / 14)
+        points.push(at(G.pointOf(F, s, pawR(s), Math.PI / 2 + offset) as Point3))
+      }
+      return sliver(points, 0.55)
+    }),
+  )
+}
+
+// Face features, in the rim's front plane (local x, -z), from the toy's drawing: eyes 19 x 23 at
+// +-19.5, 10.5 up; nose 4 down; blush at +-32; two whiskers a side.
+const EYE_Z = HEAD_MID + 10.5 * JS
+const NOSE_Z = HEAD_MID - 4 * JS
+const MOUTH_Z = NOSE_Z - 2.5
+const crescent = (cx: number, cz: number, r: number, thick: number) => {
+  const outer = Array.from({ length: 13 }, (_, i) => [cx + r * Math.cos((Math.PI * i) / 12), -(cz - r * Math.sin((Math.PI * i) / 12))] as Flat)
+  const inner = Array.from({ length: 13 }, (_, i) => [cx + (r - thick) * Math.cos((Math.PI * (12 - i)) / 12), -(cz - (r - thick * 1.4) * Math.sin((Math.PI * (12 - i)) / 12))] as Flat)
+  return pathOf([...outer, ...inner].map(([x, y]) => [fix(x), fix(y)] as Flat), true)
+}
+const WHISKERS = [-1, 1].flatMap((side) => [
+  { root: [JX + side * 10.8, -(NOSE_Z + 0.9)] as Flat, tip: [JX + side * 18.6, -(NOSE_Z + 2.6)] as Flat },
+  { root: [JX + side * 10.8, -(NOSE_Z - 0.6)] as Flat, tip: [JX + side * 18.2, -(NOSE_Z - 2.4)] as Flat },
+])
+const facePath = (points: number[][]) => pathOf(points.map(([x, y]) => [fix(x!), fix(y!)] as Flat), true)
 
 export const JO_ART = {
-  torso: solid({ x: JX - 28 * JS, y: -33, w: 56 * JS, d: 17, r: 16 * JS }, LEDGE.floorTop, HEAD.z0 - LEDGE.floorTop + 0.4, 8),
-  earLeft: turned(G.disc(0, 10 * JS, 10 * JS, EAR(-1), P)),
-  earRight: turned(G.disc(0, 10 * JS, 10 * JS, EAR(1), P)),
-  earTip: G.circleOf(EAR(1), 10 * JS, 5.6 * JS, P),
+  torso: solid({ x: JX - 14 * JS, y: -27, w: 28 * JS, d: 11, r: 6 * JS }, LEDGE.floorTop, HEAD.z0 - LEDGE.floorTop + 0.4, 8),
+  ears: [
+    earOf([LEFT_EAR], [panelOf(LEFT_EAR, 0.86, 1.6)], tipOf(LEFT_EAR, LEFT_EAR.half - 6.4), [JX - 7.4, EAR.y1, HEAD.z1 - 2]),
+    earOf([RIGHT_LOW, RIGHT_TIP], [panelOf(RIGHT_LOW, 0.9, 1.4), panelOf(RIGHT_TIP, 0.78, 1)], tipOf(RIGHT_TIP, RIGHT_TIP.half - 5.4), [JX + 7.4, EAR.y1, HEAD.z1 - 2]),
+  ],
+  earPlane: onFaceY(EAR.y1),
+  beadR: BEAD_R * G.scaleOf(P),
   head: turned(G.prismOf(ALONG_Y(0), profile(HEAD.x0, HEAD.z0, HEAD.x1, HEAD.z1, HEAD.r), HEAD.y0, HEAD.y1, P)),
   rim: turned(G.prismOf(ALONG_Y(0), profile(HEAD.x0 + 1.4, HEAD.z0 + 1.4, HEAD.x1 - 1.4, HEAD.z1 - 1.4, HEAD.r - 1.4), HEAD.y1, RIM_Y, P)),
-  screen: turned(G.prismOf(ALONG_Y(0), profile(FACE.x0, FACE.z0, FACE.x1, FACE.z1, FACE.r), RIM_Y, FACE_Y, P)),
-  facePlane: onFaceY(FACE_Y),
-  // Face features in the face plane (local x, -z), from the robot model: eyes 16 x 21 at +-13, 5 up.
-  eye: { rx: 8 * JS, ry: 10.5 * JS },
-  eyes: [-1, 1].map((side) => ({ cx: JX + side * 13 * JS, cy: -(HEAD_MID + 6 * JS) })),
-  blush: [-1, 1].map((side) => ({ cx: JX + side * 23 * JS, cy: -(HEAD_MID - 6 * JS), rx: 6.75 * JS, ry: 4 * JS })),
-  smile: (() => {
-    const outer = Array.from({ length: 13 }, (_, i) => [JX + 5.6 * JS * Math.cos((Math.PI * i) / 12), SMILE_Z + 5.6 * JS * Math.sin((Math.PI * i) / 12)] as Flat)
-    const inner = Array.from({ length: 13 }, (_, i) => [JX + 3.4 * JS * Math.cos((Math.PI * (12 - i)) / 12), SMILE_Z + 2.6 * JS * Math.sin((Math.PI * (12 - i)) / 12)] as Flat)
-    return pathOf([...outer, ...inner], true)
-  })(),
-  collar: round(JX, HEAD_Y, 2.2, ANTENNA.z0 - 0.3, ANTENNA.collar + 0.3, 18),
-  stalk: round(JX, HEAD_Y, 0.95, ANTENNA.z0 + ANTENNA.collar, ANTENNA.stalk, 12),
-  // The status light is one smooth glass ball: a circle with a radial gradient lit from the kit's light.
-  ballAt: at(BALL),
-  ballR: ANTENNA.ball * G.scaleOf(P),
-  ballLit: at(G.add3(BALL, G.mul3(G.lightOf(P), ANTENNA.ball * 0.55)) as Point3),
-  hands: HANDS.map((centre) => turned(G.lathe(ELLIPSOID, G.frameAlong(centre, [1, 0, 0]), P))),
-  // Two finger seams across each mitten.
-  fingers: HANDS.map((centre) => join([-1.7, 0.6].map((s) => G.arcOf(G.frameAlong(centre, [1, 0, 0]), s, handR(s), P, { slope: handSlope(s) })))),
+  facePlane: onFaceY(RIM_Y),
+  eye: { rx: 9.5 * JS, ry: 11.5 * JS },
+  eyes: [-1, 1].map((side) => ({ cx: JX + side * 19.5 * JS, cy: -EYE_Z })),
+  blush: [-1, 1].map((side) => ({ cx: JX + side * 32 * JS, cy: -(NOSE_Z - 0.4), rx: 7.6 * JS, ry: 4.4 * JS })),
+  // A soft rounded triangle, point down.
+  nose: `M${fix(JX - 1.7)} ${fix(-(NOSE_Z + 1.1))}Q${JX} ${fix(-(NOSE_Z + 1.7))} ${fix(JX + 1.7)} ${fix(-(NOSE_Z + 1.1))}Q${fix(JX + 1.5)} ${fix(-(NOSE_Z - 0.2))} ${JX} ${fix(-(NOSE_Z - 0.9))}Q${fix(JX - 1.5)} ${fix(-(NOSE_Z - 0.2))} ${fix(JX - 1.7)} ${fix(-(NOSE_Z + 1.1))}Z`,
+  // The philtrum from the nose's point down to the mouth, and the mouth as two small curls.
+  mouth: join([
+    facePath([[JX - 0.22, -(NOSE_Z - 0.6)], [JX + 0.22, -(NOSE_Z - 0.6)], [JX + 0.22, -(MOUTH_Z + 0.2)], [JX - 0.22, -(MOUTH_Z + 0.2)]]),
+    crescent(JX - 1.45, MOUTH_Z + 0.25, 1.45, 0.45),
+    crescent(JX + 1.45, MOUTH_Z + 0.25, 1.45, 0.45),
+  ]),
+  whiskers: join(WHISKERS.map(({ root, tip }) => sliver(line(root, tip), 0.5, true))),
+  pores: WHISKERS.map(({ root }) => root),
+  paws: PAWS.map((centre) => turned(G.lathe(PAW_PROFILE, G.frameAlong(centre, PAW_DIR), P))),
+  toes: PAWS.map(toesOf),
 }
 
 // PC ---------------------------------------------------------------------------------------------
@@ -561,8 +668,8 @@ export const JO_BOX = (() => {
   const points = [
     at([HEAD.x0 - 4, HEAD_Y, HEAD.z0]),
     at([HEAD.x1 + 4, HEAD_Y, HEAD.z0]),
-    at([HEAD.x0 - 4, HEAD_Y, BALL[2] + 4]),
-    at([HEAD.x1 + 4, HEAD_Y, BALL[2] + 4]),
+    at([HEAD.x0 - 4, HEAD_Y, EAR_TOP + 2]),
+    at([HEAD.x1 + 4, HEAD_Y, EAR_TOP + 2]),
     at([HEAD.x0, LIP_FRONT, LEDGE.top]),
     at([HEAD.x1, LIP_FRONT, LEDGE.top]),
   ]
@@ -570,7 +677,7 @@ export const JO_BOX = (() => {
   const ys = points.map(([, y]) => y)
   return { x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) }
 })()
-export const FACE_AT = at([JX, FACE_Y, HEAD_MID + 2])
+export const FACE_AT = at([JX, RIM_Y, HEAD_MID + 2])
 export const CONTROL_AT = {
   bluetooth: at([TOGGLE_X[0]!, TOGGLE_Y, PIVOT_Z]),
   wifi: at([TOGGLE_X[1]!, TOGGLE_Y, PIVOT_Z]),

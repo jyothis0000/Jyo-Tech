@@ -162,7 +162,7 @@ function ExtensionCard({ p }: { p: Product }) {
           <img src={p.icon} alt="" width={32} height={32} className="h-8 w-8 rounded-lg" />
           <p className="eyebrow">{p.name} · {p.kind}</p>
         </div>
-        <h3 className="display mt-5 text-[clamp(2rem,3.4vw,2.9rem)]">
+        <h3 className="display mt-5 text-balance text-[clamp(1.75rem,2.6vw,2.25rem)]">
           <Link to={p.path} className="brand-text">{p.pitch}</Link>
         </h3>
         <p className="mt-4 leading-relaxed">{p.lede}</p>

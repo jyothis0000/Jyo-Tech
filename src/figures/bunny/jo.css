@@ -65,14 +65,17 @@
   fill: var(--anatomy-lo);
 }
 
-.jo-screen > .iso-fill,
-.jo-screen > .iso-shade,
-.jo-screen > .iso-top {
-  fill: #08080a;
+/* Eyes: a deep glossy pupil, a soft lighter shine low in it, two sparkles. */
+.jo-eye {
+  fill: #050506;
+  stroke: var(--anatomy-mid);
+  stroke-width: var(--anatomy-weight);
+  vector-effect: non-scaling-stroke;
 }
 
-.jo-eye {
-  fill: var(--anatomy-hi);
+.jo-iris {
+  fill: var(--anatomy-mid);
+  opacity: 0.35;
 }
 
 .jo-sparkle {
@@ -84,8 +87,32 @@
   opacity: 0.32;
 }
 
-.jo-smile {
+.jo-nose {
   fill: var(--anatomy-hi);
+}
+
+.jo-mouth,
+.jo-toe {
+  fill: var(--anatomy-mid);
+}
+
+.jo-whisker {
+  fill: var(--anatomy-lo);
+}
+
+/* The inner ear: a darker panel that warms to the status colour toward its tip. */
+.jo-inner {
+  fill: var(--anatomy-shade-0);
+}
+
+.jo-ear-stop {
+  stop-color: var(--jo-status);
+  stop-opacity: 0.5;
+  transition: stop-color 0.4s var(--anatomy-ease);
+}
+
+.jo-ear-stop[stop-opacity='0'] {
+  stop-opacity: 0;
 }
 
 .jo-blink {
@@ -112,19 +139,17 @@
   --jo-status: var(--jo-mint);
 }
 
-.jo-light[data-status='remind'],
-.jo-glow[data-status='remind'] {
+.jo-light[data-status='remind'] {
   --jo-status: var(--jo-amber);
 }
 
 .jo-glow {
-  --jo-status: var(--jo-mint);
   fill: var(--jo-status);
   filter: blur(3px);
   transition: fill 0.4s var(--anatomy-ease);
 }
 
-/* The status ball: one glass sphere, pale core toward the light, the status colour, a darker rim. */
+/* The status beads: glass spheres, pale core toward the light, the status colour, a darker rim. */
 .jo-light stop {
   transition: stop-color 0.4s var(--anatomy-ease);
 }

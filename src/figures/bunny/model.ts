@@ -13,8 +13,9 @@
 //           title), divider, user bubble, reply bubble + tick, input field, cursor, send button,
 //           reminder bubble with Join and Snooze buttons
 // mouse     pad with stitched edge, shell, button seams, wheel slot, wheel
-// Bunny        torso, head, front rim, face screen, 2 eyes + 4 sparkles, 2 blush, smile, 2 ears + tip ring,
-//           antenna collar, stalk, status light, glow, 2 hands with finger seams
+// Bunny     torso, 2 long ears (the right tip bent over) with inner panels, status light (a glass bead
+//           and glow at each inner-ear tip), head, front rim, 2 eyes + iris shine + 4 sparkles, nose,
+//           philtrum, mouth, 2 blush, 4 whiskers + pores, 2 front paws with toe grooves
 // PC        4 feet, case, front bezel, side panel, 2 thumb screws, power button + ring, activity LED,
 //           cartridge slot, model cartridge (body, label plate, grip ribs), eject button, front vents,
 //           top vents, side vents, network port, dust cap, pull tab, tether, rivet, front port

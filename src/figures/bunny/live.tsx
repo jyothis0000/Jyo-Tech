@@ -23,6 +23,7 @@ import {
   beatOf,
   holdOf,
   reminderOf,
+  sendAt,
   type Ask,
   type Control,
   type Settings,
@@ -51,7 +52,8 @@ interface Run {
 interface Nodes {
   jo: SVGGElement | null
   eyes: SVGGElement[]
-  glow: SVGCircleElement | null
+  glow: SVGCircleElement[]
+  ears: { node: SVGGElement; pivot: string }[]
   light: SVGGElement | null
   led: SVGPathElement | null
   keys: SVGGElement[]
@@ -163,6 +165,7 @@ export function JoLive(props: Props) {
     rise: 0,
     riseTo: 0,
     glow: 0.45,
+    twitch: 0,
     clock: 0,
     pointer: null as Flat | null,
     touring: false,
@@ -277,8 +280,12 @@ export function JoLive(props: Props) {
     n.knobs.forEach((knob, index) => knob.firstElementChild?.toggleAttribute('data-lit', lit === SLIDERS[index]))
 
     n.light?.setAttribute('data-status', remind ? 'remind' : 'ready')
-    n.glow?.setAttribute('data-status', remind ? 'remind' : 'ready')
-    n.glow?.style.setProperty('opacity', s.glow.toFixed(3))
+    n.glow.forEach((glow) => glow.style.setProperty('opacity', s.glow.toFixed(3)))
+    // The ears twitch when a command runs: left first, the right a beat later and the other way.
+    n.ears.forEach(({ node, pivot }, index) => {
+      const angle = s.twitch * (index ? 1 : -1) * (index ? Math.sin(s.clock * 31 - 0.9) : Math.sin(s.clock * 31))
+      node.setAttribute('transform', Math.abs(angle) > 0.02 ? `rotate(${tenth(angle)} ${pivot})` : '')
+    })
     n.led?.toggleAttribute('data-on', Boolean(beat?.running))
 
     let readout = s.readout
@@ -355,6 +362,9 @@ export function JoLive(props: Props) {
       }
       s.look = [follow(s.look[0], aim[0], dt, 0.14, calm), follow(s.look[1], aim[1], dt, 0.14, calm)]
       s.rise = follow(s.rise, s.riseTo, dt, 0.2, calm)
+      // A quick, decaying ear twitch from the moment a command is sent or the reminder lands.
+      const since = now?.ask ? now.t - sendAt(now.ask.said) : now ? now.t : -1
+      s.twitch = !calm && since >= 0 && since < 0.9 ? 7 * Math.exp(-since * 4.5) * Math.min(1, since / 0.06) : 0
       const pulsing = !calm && Boolean((beat && beat.running) || (now && !now.ask))
       const glowTo = pulsing ? 0.55 + 0.45 * Math.sin(s.clock * Math.PI * 2 * 0.9) ** 2 : now ? 0.7 : 0.45
       s.glow = pulsing ? glowTo : follow(s.glow, glowTo, dt, 0.25, calm)
@@ -380,7 +390,8 @@ export function JoLive(props: Props) {
     nodes.current = {
       jo: node.querySelector('[data-part="jo"]'),
       eyes: all<SVGGElement>('[data-eye]'),
-      glow: node.querySelector('[data-part="glow"]'),
+      glow: all<SVGCircleElement>('[data-part="glow"]'),
+      ears: all<SVGGElement>('[data-ear]').map((ear) => ({ node: ear, pivot: ear.getAttribute('data-pivot') ?? '0 0' })),
       light: node.querySelector('.jo-light'),
       led: node.querySelector('[data-part="led"]'),
       keys: ['Alt', 'Space'].map((name) => node.querySelector<SVGGElement>(`[data-key="${name}"]`)!).filter(Boolean),

@@ -21,23 +21,23 @@ export const LEDGE = { x0: GLASS.x0, x1: GLASS.x1, y0: GLASS_Y, y1: -5.4, floor:
 export const LIP_FRONT = LEDGE.y1
 export const LIP_BACK = LEDGE.y1 - LEDGE.lip
 
-// Bunny stands on the ledge floor behind the lip; head and hands show above it. Sizes are the
-// robot model's (head 100 wide) times JS.
+// Bunny stands on the ledge floor behind the lip; head, ears and paws show above it. JS scales the
+// toy's drawing units (head 100 wide, 84 tall) to world units.
 export const JS = 0.432
 export const JX = 54
-export const HEAD = { x0: JX - 50 * JS, x1: JX + 50 * JS, y0: -35.6, y1: -14.4, z0: 68, z1: 68 + 84 * JS, r: 31 * JS }
+export const HEAD = { x0: JX - 50 * JS, x1: JX + 50 * JS, y0: -29.4, y1: -14.4, z0: 68, z1: 68 + 84 * JS, r: 36 * JS }
 export const HEAD_MID = (HEAD.z0 + HEAD.z1) / 2
 export const RIM_Y = HEAD.y1 + 1
-export const FACE_Y = RIM_Y + 1
 export const RISE = 3.4
-export const ANTENNA = { z0: HEAD.z1, collar: 1.3, stalk: 6.4, ball: 3.5 }
-export const BALL: Point3 = [JX, (HEAD.y0 + HEAD.y1) / 2, ANTENNA.z0 + ANTENNA.collar + ANTENNA.stalk + ANTENNA.ball - 0.5]
-export const HANDS: Point3[] = [-1, 1].map((side) => [JX + side * 43 * JS, LIP_FRONT - 1.3, LEDGE.top + 2] as Point3)
-export const HAND = { a: 12.6 * JS, b: 8.6 * JS }
+// The ears stand behind the head, their front faces flush on its back face and 4.8 clear of the glass.
+export const EAR = { y0: HEAD.y0 - 3.2, y1: HEAD.y0, base: HEAD.z1 - 10, w: 10.4 }
+export const EAR_TOP = HEAD.z1 + 30
+// Two front paws lie on the lip, their backs against the face, their toes over the front edge.
+export const PAW = { a: 5.2, b: 3.7, y: RIM_Y + 0.3 + 5.2 * 0.97, dx: 12.5 }
 
 // The chat box and the reminder bubble are drawn in the plane of the glass (local x, -z).
 export const CHAT = { x0: -70, x1: 22, z0: 82, z1: 146, r: 4 }
-export const BUBBLE = { x0: JX - 40, x1: JX + 42, z0: 125, z1: 164, r: 4 }
+export const BUBBLE = { x0: JX - 40, x1: JX + 42, z0: 139, z1: 176, r: 4 }
 
 export const PC = { x: 160, y: -80, w: 48, d: 76, r: 4 }
 export const PC_Z = 3.6

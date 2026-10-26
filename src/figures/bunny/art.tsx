@@ -139,40 +139,63 @@ const LEDGE_BACK = (
   </g>
 )
 
+// The status light lives in the ears: each inner-ear panel warms toward its tip, where a small glass
+// bead sits, pale core toward the light, the status colour, a darker rim.
+const BEAD_FX = 0.5 + (JO_ART.ears[0]!.beadLit[0] - JO_ART.ears[0]!.beadAt[0]) / (2 * JO_ART.beadR)
+const BEAD_FY = 0.5 + (JO_ART.ears[0]!.beadLit[1] - JO_ART.ears[0]!.beadAt[1]) / (2 * JO_ART.beadR)
+
 const JO = (
   <g key="jo">
     <Solid paths={JO_ART.torso} tone="hi" />
-    <Solid paths={JO_ART.earLeft} tone="hi" />
+    <g className="jo-light">
+      <linearGradient id="jo-ear-glow" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0.45" className="jo-ear-stop" stopOpacity={0} />
+        <stop offset="1" className="jo-ear-stop" />
+      </linearGradient>
+      <radialGradient id="jo-ball" cx="0.5" cy="0.5" r="0.5" fx={BEAD_FX} fy={BEAD_FY}>
+        <stop offset="0" className="jo-ball-core" />
+        <stop offset="0.5" className="jo-ball-body" />
+        <stop offset="1" className="jo-ball-rim" />
+      </radialGradient>
+      {JO_ART.ears.map((ear, side) => (
+        <g key={side} data-ear="" data-pivot={`${ear.pivot[0]} ${ear.pivot[1]}`}>
+          {ear.solids.map((paths, index) => (
+            <React.Fragment key={index}>
+              <Solid paths={paths} tone="hi" />
+              <g transform={JO_ART.earPlane}>
+                <path className="jo-inner" d={ear.panels[index]} />
+                {index === ear.solids.length - 1 ? <path className="jo-ear-glow" d={ear.panels[index]} fill="url(#jo-ear-glow)" /> : null}
+                <Line d={ear.panels[index]!} tone="faint" />
+              </g>
+            </React.Fragment>
+          ))}
+          <circle className="jo-glow" data-part="glow" cx={ear.beadAt[0]} cy={ear.beadAt[1]} r={4.2} />
+          <circle className="jo-ball" cx={ear.beadAt[0]} cy={ear.beadAt[1]} r={JO_ART.beadR} fill="url(#jo-ball)" />
+        </g>
+      ))}
+    </g>
     <Solid paths={JO_ART.head} tone="hi" crease="lo" />
     <Solid paths={JO_ART.rim} tone="hi" crease="faint" />
-    <Solid paths={JO_ART.screen} tone="lo" crease="none" className="jo-screen" />
     <g transform={JO_ART.facePlane}>
       {JO_ART.blush.map(({ cx, cy, rx, ry }, index) => (
         <ellipse key={index} className="jo-blush" cx={cx} cy={cy} rx={rx} ry={ry} />
+      ))}
+      <path className="jo-whisker" d={JO_ART.whiskers} />
+      {JO_ART.pores.map(([cx, cy], index) => (
+        <circle key={index} className="jo-whisker" cx={cx} cy={cy} r={0.38} />
       ))}
       {JO_ART.eyes.map(({ cx, cy }, index) => (
         <g key={index} data-eye="">
           <g className="jo-blink">
             <ellipse className="jo-eye" cx={cx} cy={cy} rx={JO_ART.eye.rx} ry={JO_ART.eye.ry} />
-            <circle className="jo-sparkle" cx={cx - 1.2} cy={cy - 1.75} r={1} />
-            <circle className="jo-sparkle" cx={cx + 1.1} cy={cy + 1.55} r={0.48} />
+            <ellipse className="jo-iris" cx={cx} cy={cy + JO_ART.eye.ry * 0.42} rx={JO_ART.eye.rx * 0.62} ry={JO_ART.eye.ry * 0.36} />
+            <circle className="jo-sparkle" cx={cx - 1.3} cy={cy - 1.9} r={1.35} />
+            <circle className="jo-sparkle" cx={cx + 1.35} cy={cy + 1.5} r={0.6} />
           </g>
         </g>
       ))}
-      <path className="jo-smile" d={JO_ART.smile} />
-    </g>
-    <Solid paths={JO_ART.earRight} tone="hi" />
-    <Line d={JO_ART.earTip} tone="mid" />
-    <Solid paths={JO_ART.collar} tone="hi" />
-    <Solid paths={JO_ART.stalk} tone="hi" crease="none" />
-    <circle className="jo-glow" data-part="glow" cx={JO_ART.ballAt[0]} cy={JO_ART.ballAt[1]} r={7.5} />
-    <g className="jo-light">
-      <radialGradient id="jo-ball" gradientUnits="userSpaceOnUse" cx={JO_ART.ballAt[0]} cy={JO_ART.ballAt[1]} r={JO_ART.ballR} fx={JO_ART.ballLit[0]} fy={JO_ART.ballLit[1]}>
-        <stop offset="0" className="jo-ball-core" />
-        <stop offset="0.5" className="jo-ball-body" />
-        <stop offset="1" className="jo-ball-rim" />
-      </radialGradient>
-      <circle className="jo-ball" cx={JO_ART.ballAt[0]} cy={JO_ART.ballAt[1]} r={JO_ART.ballR} fill="url(#jo-ball)" />
+      <path className="jo-nose" d={JO_ART.nose} />
+      <path className="jo-mouth" d={JO_ART.mouth} />
     </g>
   </g>
 )
@@ -193,8 +216,10 @@ const LEDGE_FRONT = (
 
 const HANDS = (
   <g key="hands">
-    {JO_ART.hands.map((paths, index) => (
-      <Solid key={index} paths={paths} tone="hi" inner={<Line d={JO_ART.fingers[index]!} tone="lo" />} />
+    {JO_ART.paws.map((paths, index) => (
+      <Solid key={index} paths={paths} tone="hi">
+        <path className="jo-toe" d={JO_ART.toes[index]} />
+      </Solid>
     ))}
   </g>
 )
@@ -349,7 +374,7 @@ const DECK_LINE = (
 )
 
 const LABEL =
-  'Bunny AI Assistant as a desk diorama. Bunny, a small toy robot with a glowing face screen and an antenna light, peeks over the taskbar ledge of a monitor with its hands on the edge. Beside the monitor stands a mini PC holding the model cartridge, with its network port capped; in front are a keyboard, a mouse on its pad and a control deck with switches for Bluetooth, Wi-Fi and dark mode and sliders for volume and brightness. Asking Bunny opens a chat on the screen, a fixed rule runs on the PC, and the matching control on the deck moves.'
+  'Bunny AI Assistant as a desk diorama. Bunny, a small toy bunny with long ears whose inner tips glow as its status light, peeks over the taskbar ledge of a monitor with its front paws on the edge. Beside the monitor stands a mini PC holding the model cartridge, with its network port capped; in front are a keyboard, a mouse on its pad and a control deck with switches for Bluetooth, Wi-Fi and dark mode and sliders for volume and brightness. Asking Bunny opens a chat on the screen, a fixed rule runs on the PC, and the matching control on the deck moves.'
 
 export function JoArt() {
   return (
