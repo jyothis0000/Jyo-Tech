@@ -1,4 +1,52 @@
 @import "tailwindcss";
+@import "./components/iso/iso.css";
+
+/* Dark, faintly blue-tinted base; each product brings its own two-stop gradient. */
+@theme {
+  --color-page: oklch(0.15 0.012 265);
+  --color-plate: oklch(0.18 0.014 265);
+  --color-raised: oklch(0.22 0.016 265);
+  --color-rule: oklch(0.95 0.01 265 / 0.08);
+  --color-rule-strong: oklch(0.95 0.01 265 / 0.16);
+  --color-dim: oklch(0.58 0.015 265);
+  --color-body: oklch(0.74 0.012 265);
+  --color-ink: oklch(0.95 0.006 265);
+  --color-lit: oklch(0.99 0.003 265);
+  --font-sans: 'Geist', system-ui, sans-serif;
+  --font-display: 'Geist', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, Menlo, Consolas, monospace;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.iso {
+  --anatomy-mono: var(--font-mono);
+}
+
+/* A product's brand: plates take a faint tint of it, the lit part glows in it. */
+.brand {
+  --anatomy-page: color-mix(in oklch, var(--brand-a) 6%, #0e0e10);
+  --anatomy-card: color-mix(in oklch, var(--brand-a) 5%, #121214);
+  --anatomy-paper: var(--anatomy-card);
+  --anatomy-face: color-mix(in oklch, var(--brand-a) 5%, #1b1b1d);
+  --anatomy-top: color-mix(in oklch, var(--brand-a) 5%, #1d1d1f);
+  --anatomy-shade-0: color-mix(in oklch, var(--brand-a) 5%, #0e0e10);
+  --anatomy-shade-1: color-mix(in oklch, var(--brand-a) 5%, #111113);
+  --anatomy-shade-2: color-mix(in oklch, var(--brand-a) 5%, #141416);
+  --anatomy-shade-3: color-mix(in oklch, var(--brand-a) 5%, #18181a);
+  --anatomy-lit-top: color-mix(in oklch, var(--brand-a) 5%, #262628);
+  --anatomy-lit-shade: color-mix(in oklch, var(--brand-a) 5%, #1d1d1f);
+  --anatomy-lit: color-mix(in oklch, var(--brand-b) 55%, #ffffff);
+  --anatomy-mid: color-mix(in oklch, var(--brand-a) 10%, #6a6a6a);
+}
+
+.brand .iso-plate {
+  border-radius: 20px;
+  box-shadow: 0 0 0 1px color-mix(in oklch, var(--brand-a) 35%, transparent), 0 30px 80px -40px color-mix(in oklch, var(--brand-a) 60%, transparent);
+}
+
+.brand .iso-figure {
+  margin: 0;
+}
 
 @layer base {
   html {
@@ -6,10 +54,12 @@
   }
 
   body {
-    background-color: #09090b;
-    color: #f4f4f5;
+    background-color: var(--color-page);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    letter-spacing: -0.005em;
     -webkit-font-smoothing: antialiased;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
   #root {
@@ -17,6 +67,180 @@
     min-height: 100svh;
     display: flex;
     flex-direction: column;
-    text-align: left;
   }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-lit);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  .display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+    color: var(--color-ink);
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.4;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-dim);
+  }
+
+  /* Brand colour for words: one solid, lightened tone, never a gradient. */
+  .brand-text {
+    color: color-mix(in oklch, var(--brand-a) 72%, white);
+  }
+
+  .brand-wash {
+    background:
+      radial-gradient(60% 70% at 85% 0%, color-mix(in oklch, var(--brand-a) 22%, transparent), transparent 70%),
+      radial-gradient(50% 60% at 0% 100%, color-mix(in oklch, var(--brand-b) 12%, transparent), transparent 70%);
+  }
+
+  .brand-rule {
+    height: 2px;
+    background: linear-gradient(90deg, var(--brand-a), var(--brand-b));
+  }
+
+  .btn {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    border-radius: 999px;
+    padding: 0.75rem 1.3rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+  }
+
+  /* Fill sweeps in from the left on hover. */
+  .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s var(--ease-out);
+  }
+
+  @media (hover: hover) {
+    .btn:hover::before {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+
+  .btn-brand {
+    color: oklch(0.16 0.02 265);
+    background: color-mix(in oklch, var(--brand-a, var(--color-ink)) 72%, white);
+  }
+
+  .btn-brand::before {
+    background: var(--color-lit);
+  }
+
+  .btn-line {
+    color: var(--color-ink);
+    box-shadow: inset 0 0 0 1px var(--color-rule-strong);
+  }
+
+  .btn-line::before {
+    background: var(--color-raised);
+  }
+
+  .btn-off {
+    color: var(--color-dim);
+    box-shadow: inset 0 0 0 1px var(--color-rule-strong);
+  }
+
+  .link {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-rule-strong);
+    text-underline-offset: 3px;
+  }
+
+  .link:hover {
+    text-decoration-color: var(--color-ink);
+  }
+
+  .chip {
+    display: inline-flex;
+    border-radius: 999px;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.8rem;
+    color: var(--color-ink);
+    box-shadow: inset 0 0 0 1px var(--color-rule-strong);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn::before {
+      transition: none;
+    }
+  }
+}
+
+
+.hero-mesh {
+  background:
+    radial-gradient(45% 55% at 12% 18%, oklch(0.6 0.2 275 / 0.28), transparent 70%),
+    radial-gradient(40% 50% at 88% 30%, oklch(0.72 0.17 160 / 0.2), transparent 70%),
+    radial-gradient(50% 55% at 60% 105%, oklch(0.72 0.14 295 / 0.24), transparent 70%);
+  mask-image: linear-gradient(to bottom, black 55%, transparent);
+}
+
+
+.caret {
+  display: inline-block;
+  width: 0.07em;
+  height: 0.82em;
+  margin-left: 0.04em;
+  vertical-align: -0.04em;
+  background: var(--color-lit);
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+.fx-wait [data-fx="type"] {
+  visibility: hidden;
+}
+
+/* Soft lab glow behind the call to action: the art's own magenta and acid green. */
+.lab-wash {
+  background:
+    radial-gradient(45% 60% at 80% 40%, oklch(0.62 0.27 330 / 0.18), transparent 70%),
+    radial-gradient(40% 55% at 10% 90%, oklch(0.85 0.25 140 / 0.1), transparent 70%);
+}
+
+/* The lab's own accent, taken from the character's lightning. */
+.lab-text {
+  color: oklch(0.86 0.17 150);
 }

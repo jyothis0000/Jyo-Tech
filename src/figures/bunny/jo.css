@@ -1,0 +1,265 @@
+.jo-fig {
+  --jo-mint: #6ef2c7;
+  --jo-amber: #fbbf24;
+  --jo-glass: #0b0b0c;
+  --jo-ink: #d4d4d4;
+  position: relative;
+  cursor: pointer;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.jo-fig:focus {
+  outline: none;
+}
+
+.jo-fig:focus-visible {
+  outline: 1px solid var(--anatomy-muted);
+  outline-offset: 6px;
+}
+
+.jo-glass {
+  fill: var(--jo-glass);
+}
+
+.jo-hole {
+  fill: var(--anatomy-shade-0);
+}
+
+.jo-bloom {
+  fill: #ffffff;
+  opacity: 0.05;
+  filter: blur(10px);
+}
+
+.jo-glare-stop {
+  stop-color: #ffffff;
+  stop-opacity: 0.05;
+}
+
+.jo-glare-stop[stop-opacity='0'] {
+  stop-opacity: 0;
+}
+
+.jo-win {
+  fill: #2e2e32;
+}
+
+.jo-win[data-dark] {
+  fill: #121214;
+  opacity: 0;
+}
+
+.jo-win-picture {
+  fill: #ffffff;
+  opacity: 0.045;
+}
+
+.jo-wheel {
+  fill: var(--anatomy-mid);
+}
+
+.jo-icon {
+  fill: var(--anatomy-lo);
+}
+
+/* Eyes: a deep glossy pupil, a soft lighter shine low in it, two sparkles. */
+.jo-eye {
+  fill: #050506;
+  stroke: var(--anatomy-mid);
+  stroke-width: var(--anatomy-weight);
+  vector-effect: non-scaling-stroke;
+}
+
+.jo-iris {
+  fill: var(--anatomy-mid);
+  opacity: 0.35;
+}
+
+.jo-sparkle {
+  fill: var(--anatomy-lit);
+}
+
+.jo-blush {
+  fill: var(--anatomy-mid);
+  opacity: 0.32;
+}
+
+.jo-nose {
+  fill: var(--anatomy-hi);
+}
+
+.jo-mouth,
+.jo-toe {
+  fill: var(--anatomy-mid);
+}
+
+.jo-whisker {
+  fill: var(--anatomy-lo);
+}
+
+/* The inner ear: a darker panel that warms to the status colour toward its tip. */
+.jo-inner {
+  fill: var(--anatomy-shade-0);
+}
+
+.jo-ear-stop {
+  stop-color: var(--jo-status);
+  stop-opacity: 0.5;
+  transition: stop-color 0.4s var(--anatomy-ease);
+}
+
+.jo-ear-stop[stop-opacity='0'] {
+  stop-opacity: 0;
+}
+
+.jo-blink {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.iso-stage[data-inview] .jo-blink {
+  animation: jo-blink 5.4s 1.2s infinite;
+}
+
+@keyframes jo-blink {
+  0%,
+  93%,
+  100% {
+    transform: scaleY(1);
+  }
+  95.5% {
+    transform: scaleY(0.12);
+  }
+}
+
+.jo-light {
+  --jo-status: var(--jo-mint);
+}
+
+.jo-light[data-status='remind'] {
+  --jo-status: var(--jo-amber);
+}
+
+.jo-glow {
+  fill: var(--jo-status);
+  filter: blur(3px);
+  transition: fill 0.4s var(--anatomy-ease);
+}
+
+/* The status beads: glass spheres, pale core toward the light, the status colour, a darker rim. */
+.jo-light stop {
+  transition: stop-color 0.4s var(--anatomy-ease);
+}
+
+.jo-ball-core {
+  stop-color: color-mix(in oklab, var(--jo-status) 35%, #fff);
+}
+
+.jo-ball-body {
+  stop-color: var(--jo-status);
+}
+
+.jo-ball-rim {
+  stop-color: color-mix(in oklab, var(--jo-status) 55%, #000);
+}
+
+.jo-ball {
+  stroke: color-mix(in oklab, var(--jo-status) 70%, #fff);
+  stroke-width: var(--anatomy-weight);
+  transition: stroke 0.4s var(--anatomy-ease);
+}
+
+.jo-led {
+  fill: var(--anatomy-lo);
+  transition: fill 0.25s var(--anatomy-ease);
+}
+
+.jo-led[data-on] {
+  fill: var(--anatomy-hi);
+}
+
+.jo-lamp > .iso-top {
+  transition: fill 0.3s var(--anatomy-ease);
+}
+
+.jo-lamp[data-on] > .iso-top {
+  fill: var(--anatomy-hi);
+}
+
+.jo-key[data-down] .iso-edge {
+  stroke: var(--anatomy-hi);
+}
+
+.jo-panel {
+  fill: #161617;
+}
+
+.jo-field,
+.jo-bubble {
+  fill: #1e1e20;
+  stroke: var(--anatomy-lo);
+  stroke-width: var(--anatomy-weight);
+  vector-effect: non-scaling-stroke;
+}
+
+.jo-bubble-user {
+  fill: #2a2a2d;
+}
+
+.jo-ink {
+  fill: var(--anatomy-mid);
+}
+
+.jo-text {
+  fill: var(--jo-ink);
+  font-family: var(--anatomy-mono);
+  letter-spacing: 0;
+}
+
+.jo-cursor {
+  fill: var(--anatomy-hi);
+}
+
+.iso-stage[data-inview] .jo-cursor {
+  animation: jo-cursor 1.06s steps(1, end) infinite;
+}
+
+@keyframes jo-cursor {
+  50% {
+    fill-opacity: 0;
+  }
+}
+
+.jo-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iso-stage[data-inview] .jo-blink,
+  .iso-stage[data-inview] .jo-cursor {
+    animation: none;
+  }
+
+  .jo-fig * {
+    transition: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .jo-fig {
+    overflow: hidden;
+  }
+
+  .iso-plate .jo-fig .iso-svg {
+    width: 112%;
+    margin: -3% -6% -2%;
+  }
+}

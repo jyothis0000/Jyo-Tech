@@ -1,0 +1,85 @@
+.sp-fig {
+  position: relative;
+  border-radius: 10px;
+  cursor: pointer;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.sp-fig:focus-visible {
+  outline: 1px solid var(--anatomy-muted);
+  outline-offset: 6px;
+}
+
+.sp-fig .iso-svg {
+  overflow: visible;
+}
+
+/* The screen: Chrome and the page, in the glass plane. */
+.sp-fig .sp-glass { fill: var(--anatomy-shade-0); }
+.sp-fig .sp-hole { fill: var(--anatomy-shade-0); }
+.sp-fig .sp-strip { fill: var(--anatomy-shade-1); }
+.sp-fig .sp-bar { fill: var(--anatomy-face); }
+.sp-fig .sp-field { fill: var(--anatomy-shade-1); }
+.sp-fig .sp-ink { fill: var(--anatomy-mid); }
+.sp-fig .sp-dim { opacity: 0.6; }
+.sp-fig .sp-sheet { fill: var(--anatomy-shade-3); }
+.sp-fig .sp-band { fill: var(--anatomy-top); }
+.sp-fig .sp-card { fill: var(--anatomy-lit-shade); }
+.sp-fig .sp-pic { fill: var(--anatomy-lit-top); }
+.sp-fig .sp-pic-ink { fill: var(--anatomy-faint); }
+.sp-fig .sp-press { fill: var(--anatomy-faint); }
+.sp-fig .sp-mark { fill: var(--anatomy-lit); opacity: 0.85; }
+
+/* The popup. */
+.sp-fig .sp-shadow { opacity: 0.8; }
+.sp-fig .sp-pop { fill: var(--anatomy-lit-shade); }
+.sp-fig .sp-badge { fill: var(--anatomy-faint); }
+.sp-fig .sp-type { font-family: var(--anatomy-mono); letter-spacing: 0.01em; }
+.sp-fig .sp-type-hi { fill: var(--anatomy-hi); }
+.sp-fig .sp-type-mid { fill: var(--anatomy-text); }
+.sp-fig .sp-type-lo { fill: var(--anatomy-muted); }
+.sp-fig .sp-type-badge { fill: var(--anatomy-hi); }
+.sp-fig .sp-head { fill: var(--anatomy-shade-1); }
+.sp-fig .sp-type-cat { letter-spacing: 0.08em; font-weight: 600; }
+.sp-fig .sp-row-accent { opacity: 0; }
+.sp-fig .sp-row[data-on] .sp-row-accent { opacity: 1; }
+.sp-fig .sp-chip { fill: var(--anatomy-face); }
+.sp-fig .sp-chip-edge { fill: none; stroke: var(--anatomy-lo); stroke-width: 0.6px; }
+.sp-fig .sp-dot { fill: var(--anatomy-muted); }
+.sp-fig .sp-row[data-on] .sp-chip { fill: var(--anatomy-lit-shade); }
+.sp-fig .sp-row[data-on] .sp-chip-edge { stroke: url(#sp-brand); stroke-width: 0.9px; }
+.sp-fig .sp-row[data-on] .sp-dot { fill: url(#sp-brand); }
+.sp-fig .sp-row-type[data-on] text { fill: var(--anatomy-lit); }
+
+/* The plates. */
+.sp-fig .sp-plate-halo { opacity: 0.45; }
+.sp-fig .sp-pins { fill: var(--anatomy-shade-1); }
+.sp-fig .sp-face { fill: var(--anatomy-top); }
+.sp-fig .sp-tab-face { opacity: 0; transition: opacity 0.25s var(--anatomy-ease); }
+.sp-fig .sp-plate[data-on] .sp-tab-face { opacity: 1; }
+.sp-fig .sp-plate[data-on] > .sp-body .iso-edge { stroke: url(#sp-brand); stroke-width: 0.9px; }
+.sp-fig .sp-plate[data-on] .sp-tex { stroke: var(--anatomy-hi); }
+.sp-fig .sp-plate[data-on] .iso-dots circle { opacity: 0.7; }
+
+.sp-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .sp-fig {
+    overflow: hidden;
+  }
+
+  .iso-plate .sp-fig .iso-svg {
+    width: 112%;
+    margin: -3% -6% -2%;
+  }
+}

@@ -1,36 +1,61 @@
 import { Link } from 'react-router-dom'
+import logo from '../assets/jo-labs-logo.webp'
+import SmartLink from './SmartLink'
+import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, PORTFOLIO_URL, SITE_NAME } from '../constants'
+import { categories } from '../products'
+
+const author = [
+  { label: 'Portfolio', href: PORTFOLIO_URL },
+  { label: 'GitHub', href: GITHUB_URL },
+  { label: 'LinkedIn', href: LINKEDIN_URL },
+]
 
 export default function Footer() {
   return (
-    <footer className="mt-auto border-t border-zinc-800 bg-zinc-950">
-      <div className="mx-auto max-w-6xl px-6 py-10">
-        <div className="grid gap-8 sm:grid-cols-3">
-          <div>
-            <p className="font-semibold text-zinc-100">jyo tech</p>
-            <p className="mt-2 text-sm text-zinc-500">Browser extensions for developers and designers.</p>
-          </div>
-
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500">StackPicker</p>
-            <ul className="mt-3 space-y-2 text-sm">
-              <li><Link to="/stackpicker" className="text-zinc-400 hover:text-zinc-100">Overview</Link></li>
-              <li><Link to="/stackpicker/privacy" className="text-zinc-400 hover:text-zinc-100">Privacy</Link></li>
-              <li><Link to="/stackpicker/support" className="text-zinc-400 hover:text-zinc-100">Support</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500">WebHarvest</p>
-            <ul className="mt-3 space-y-2 text-sm">
-              <li><Link to="/webharvest" className="text-zinc-400 hover:text-zinc-100">Overview</Link></li>
-              <li><Link to="/webharvest/privacy" className="text-zinc-400 hover:text-zinc-100">Privacy</Link></li>
-              <li><Link to="/webharvest/support" className="text-zinc-400 hover:text-zinc-100">Support</Link></li>
-            </ul>
-          </div>
+    <footer className="mt-auto border-t border-rule">
+      <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 sm:px-6 lg:grid-cols-[1.4fr_1.2fr_0.8fr_0.8fr]">
+        <div>
+          <Link to="/" className="flex items-center gap-2.5">
+            <img src={logo} alt={SITE_NAME} width={130} height={80} loading="lazy" className="h-20 w-auto" />
+          </Link>
+          <p className="mt-4 text-sm">Tools for the web and the desktop, by Jyothis Manoj.</p>
+          <a href={`mailto:${CONTACT_EMAIL}`} className="link mt-1 inline-block text-sm">{CONTACT_EMAIL}</a>
         </div>
 
-        <div className="mt-10 border-t border-zinc-800 pt-6 text-center text-xs text-zinc-600">
-          © {new Date().getFullYear()} Jyothis Manoj. All rights reserved.
+        {categories.map(c => (
+          <div key={c.key}>
+            <p className="eyebrow">{c.title}</p>
+            <ul className="mt-4 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-[repeat(auto-fit,minmax(7rem,1fr))]">
+              {c.products.map(p => (
+                <li key={p.key}>
+                  <Link to={p.path} className="text-ink hover:text-lit">{p.name}</Link>
+                  <ul className="mt-2 space-y-1.5">
+                    {p.links.map(l => (
+                      <li key={l.to}><SmartLink to={l.to} className="hover:text-ink">{l.label}</SmartLink></li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+
+        <div>
+          <p className="eyebrow">Author</p>
+          <ul className="mt-4 space-y-2 text-sm">
+            {author.map(a => (
+              <li key={a.label}><a href={a.href} target="_blank" rel="noopener noreferrer" className="hover:text-ink">{a.label} ↗</a></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div className="border-t border-rule">
+        <div className="eyebrow mx-auto flex w-full max-w-6xl flex-wrap justify-between gap-3 px-4 py-5 sm:px-6">
+          <span>© {new Date().getFullYear()} Jyothis Manoj</span>
+          <span>
+            Figures drawn with <a href="https://skills.wheresryan.sh/anatomy" target="_blank" rel="noopener noreferrer" className="hover:text-ink">Anatomy</a> (MIT)
+          </span>
         </div>
       </div>
     </footer>

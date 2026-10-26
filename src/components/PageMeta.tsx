@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { SITE_URL } from '../constants'
+import { SITE_NAME, SITE_URL } from '../constants'
 
 interface PageMetaProps {
   title: string
@@ -9,7 +9,7 @@ interface PageMetaProps {
 }
 
 export default function PageMeta({ title, description, path = '', image }: PageMetaProps) {
-  const fullTitle = title === 'jyo tech' ? title : `${title} — jyo tech`
+  const fullTitle = title === SITE_NAME ? title : `${title} — ${SITE_NAME}`
   const url = `${SITE_URL}${path}`
   const ogImage = image ?? `${SITE_URL}/og-default.png`
 
