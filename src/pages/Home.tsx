@@ -108,7 +108,7 @@ export default function Home() {
 
       <section id={software.key} className="scroll-mt-20 border-t border-rule">
         <div className="mx-auto w-full max-w-6xl px-4 pt-24 sm:px-6 lg:pt-32">
-          <CategoryHead index={2} title={software.title} blurb={software.blurb} sticker="flask" />
+          <CategoryHead index={2} title={software.title} blurb={software.blurb} sticker="flask" markClass="-top-16 w-28 sm:w-32" />
         </div>
         {software.products.map(p => <SoftwareFeature key={p.key} p={p} />)}
       </section>
@@ -172,7 +172,7 @@ export default function Home() {
   )
 }
 
-function CategoryHead({ index, title, blurb, sticker, watermark = true }: { index: number; title: string; blurb: string; sticker: Art; watermark?: boolean }) {
+function CategoryHead({ index, title, blurb, sticker, watermark = true, markClass = '-top-10 w-16 sm:w-20' }: { index: number; title: string; blurb: string; sticker: Art; watermark?: boolean; markClass?: string }) {
   return (
     <div className="relative grid gap-6 lg:grid-cols-[1.3fr_1fr] lg:items-end">
       {watermark ? null : <Decor name={sticker} className="absolute -top-14 right-0 w-20 sm:w-28 lg:-top-20 lg:right-4 lg:w-32" />}
@@ -183,7 +183,7 @@ function CategoryHead({ index, title, blurb, sticker, watermark = true }: { inde
       <div className="relative isolate max-w-md lg:justify-self-end">
         {/* Sits behind the description, faded, as a watermark. */}
         {watermark ? (
-          <div className="pointer-events-none absolute -right-2 -top-10 -z-10 w-16 opacity-35 sm:w-20" aria-hidden="true">
+          <div className={`pointer-events-none absolute -right-2 -z-10 opacity-35 ${markClass}`} aria-hidden="true">
             <Decor name={sticker} className="w-full" />
           </div>
         ) : null}
