@@ -108,7 +108,7 @@ export default function Home() {
 
       <section id={software.key} className="scroll-mt-20 border-t border-rule">
         <div className="mx-auto w-full max-w-6xl px-4 pt-24 sm:px-6 lg:pt-32">
-          <CategoryHead index={2} title={software.title} blurb={software.blurb} sticker="testTube" />
+          <CategoryHead index={2} title={software.title} blurb={software.blurb} sticker="flask" />
         </div>
         {software.products.map(p => <SoftwareFeature key={p.key} p={p} />)}
       </section>
