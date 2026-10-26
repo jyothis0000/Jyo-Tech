@@ -115,9 +115,9 @@ export default function Home() {
 
       <section className="border-t border-rule">
         <div className="mx-auto w-full max-w-6xl px-4 py-24 sm:px-6 lg:py-32">
-          <div className="max-w-3xl">
+          <div>
             <p className="eyebrow">How the lab builds</p>
-            <h2 data-fx="type" className="display mt-4 text-[clamp(2.4rem,5.5vw,4.6rem)]">Built small. Kept private. Made to save time.</h2>
+            <h2 data-fx="type" className="display mt-4 whitespace-nowrap text-[clamp(1.9rem,5vw,4.2rem)]"><span className="block">Built small. Kept private.</span><span className="block">Made to save time.</span></h2>
           </div>
           <div data-fx="rise" className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-rule md:grid-cols-3">
             {reasons.map(([title, body], i) => (
