@@ -108,7 +108,7 @@ export default function Home() {
 
       <section id={software.key} className="scroll-mt-20 border-t border-rule">
         <div className="mx-auto w-full max-w-6xl px-4 pt-24 sm:px-6 lg:pt-32">
-          <CategoryHead index={2} title={software.title} blurb={software.blurb} sticker="flask" />
+          <CategoryHead index={2} title={software.title} blurb={software.blurb} sticker="flask" watermark={false} />
         </div>
         {software.products.map(p => <SoftwareFeature key={p.key} p={p} />)}
       </section>
@@ -136,7 +136,7 @@ export default function Home() {
         <div className="lab-wash pointer-events-none absolute inset-0" aria-hidden="true" />
         <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
           <div className="relative">
-            <Decor name="question" className="absolute -top-4 right-4 w-8 sm:right-16 sm:w-10" />
+            <Decor name="atom" className="absolute -top-8 right-4 w-14 sm:right-16 sm:w-20" />
             <p className="eyebrow">Next experiment</p>
             <h2 data-fx="type" className="display mt-4 text-[clamp(2.4rem,5.4vw,4.6rem)]">Got a task that eats your week?</h2>
             <p data-fx="rise" className="mt-6 max-w-lg text-lg leading-relaxed">
@@ -149,7 +149,7 @@ export default function Home() {
             </div>
           </div>
           <div className="relative mx-auto w-full max-w-[22rem] lg:max-w-none">
-            <Decor name="burst" className="absolute -left-2 bottom-6 w-12 sm:w-16" />
+            <Decor name="burst" className="absolute bottom-2 left-0 w-16 sm:w-20 lg:-left-24" />
             <div>
               <img
                 data-fx="character"
@@ -172,18 +172,21 @@ export default function Home() {
   )
 }
 
-function CategoryHead({ index, title, blurb, sticker }: { index: number; title: string; blurb: string; sticker: Art }) {
+function CategoryHead({ index, title, blurb, sticker, watermark = true }: { index: number; title: string; blurb: string; sticker: Art; watermark?: boolean }) {
   return (
-    <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr] lg:items-end">
+    <div className="relative grid gap-6 lg:grid-cols-[1.3fr_1fr] lg:items-end">
+      {watermark ? null : <Decor name={sticker} className="absolute -top-14 right-0 w-20 sm:w-28 lg:-top-20 lg:right-4 lg:w-32" />}
       <div>
         <p className="eyebrow">Category 0{index}</p>
         <h2 data-fx="type" className="display mt-4 text-[clamp(2.6rem,6.5vw,5.8rem)]">{title}</h2>
       </div>
       <div className="relative isolate max-w-md lg:justify-self-end">
         {/* Sits behind the description, faded, as a watermark. */}
-        <div className="pointer-events-none absolute -right-2 -top-10 -z-10 w-16 opacity-35 sm:w-20" aria-hidden="true">
-          <Decor name={sticker} className="w-full" />
-        </div>
+        {watermark ? (
+          <div className="pointer-events-none absolute -right-2 -top-10 -z-10 w-16 opacity-35 sm:w-20" aria-hidden="true">
+            <Decor name={sticker} className="w-full" />
+          </div>
+        ) : null}
         <p data-fx="rise" className="relative leading-relaxed">{blurb}</p>
       </div>
     </div>
