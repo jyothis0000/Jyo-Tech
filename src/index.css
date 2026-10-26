@@ -233,6 +233,13 @@
   visibility: hidden;
 }
 
+/* Soft lab glow behind the call to action: the art's own magenta and acid green. */
+.lab-wash {
+  background:
+    radial-gradient(45% 60% at 80% 40%, oklch(0.62 0.27 330 / 0.18), transparent 70%),
+    radial-gradient(40% 55% at 10% 90%, oklch(0.85 0.25 140 / 0.1), transparent 70%);
+}
+
 /* The lab's own accent, taken from the character's lightning. */
 .lab-text {
   color: oklch(0.86 0.17 150);

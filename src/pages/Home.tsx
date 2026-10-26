@@ -3,8 +3,10 @@ import PageMeta from '../components/PageMeta'
 import Datasheet from '../components/Datasheet'
 import StoreButton from '../components/StoreButton'
 import Author from '../components/Author'
-import { SITE_NAME } from '../constants'
 import labCharacter from '../assets/lab-character.webp'
+import scientistReach from '../assets/lab/scientist-reach.webp'
+import Decor, { type Art } from '../components/Decor'
+import { CONTACT_EMAIL, PORTFOLIO_URL, SITE_NAME } from '../constants'
 import { brandStyle, categories, type Product } from '../products'
 
 const proof: [string, string][] = [
@@ -13,6 +15,8 @@ const proof: [string, string][] = [
   ['20+', 'currencies and price formats read correctly'],
   ['0', 'servers of ours your data passes through'],
 ]
+
+const reasonArt: Art[] = ['splatPink', 'bolt', 'splatGreen']
 
 const reasons: [string, string][] = [
   ['Private by design', 'Every tool works on your own device. There is no account to create and no server of ours that sees what you browse, scan or type.'],
@@ -61,6 +65,10 @@ export default function Home() {
             </div>
           </div>
 
+          <Decor name="atom" className="absolute left-[46%] top-24 hidden w-24 opacity-90 lg:block" />
+          <Decor name="sparkles" className="absolute left-[40%] top-[58%] hidden w-10 lg:block" />
+          <Decor name="bubbles" className="absolute bottom-24 right-6 w-10 sm:w-12" />
+
           <div data-depth="0.1" className="relative mx-auto w-full max-w-[20rem] sm:max-w-[26rem] lg:max-w-none">
             <img
               data-fx="character"
@@ -91,7 +99,7 @@ export default function Home() {
 
       <section id={extensions.key} className="scroll-mt-20">
         <div className="mx-auto w-full max-w-6xl px-4 pb-16 pt-24 sm:px-6 lg:pt-32">
-          <CategoryHead index={1} title={extensions.title} blurb={extensions.blurb} />
+          <CategoryHead index={1} title={extensions.title} blurb={extensions.blurb} sticker="testTube" />
           <div className="mt-14 grid gap-6 lg:grid-cols-2">
             {extensions.products.map(p => <ExtensionCard key={p.key} p={p} />)}
           </div>
@@ -100,7 +108,7 @@ export default function Home() {
 
       <section id={software.key} className="scroll-mt-20 border-t border-rule">
         <div className="mx-auto w-full max-w-6xl px-4 pt-24 sm:px-6 lg:pt-32">
-          <CategoryHead index={2} title={software.title} blurb={software.blurb} />
+          <CategoryHead index={2} title={software.title} blurb={software.blurb} sticker="flask" />
         </div>
         {software.products.map(p => <SoftwareFeature key={p.key} p={p} />)}
       </section>
@@ -113,7 +121,8 @@ export default function Home() {
           </div>
           <div data-fx="rise" className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-rule md:grid-cols-3">
             {reasons.map(([title, body], i) => (
-              <div key={title} className="bg-page p-7 sm:p-9">
+              <div key={title} className="relative bg-page p-7 sm:p-9">
+                <Decor name={reasonArt[i]} className="absolute right-6 top-6 h-16 w-auto sm:h-20" />
                 <span className="font-mono text-sm text-dim">0{i + 1}</span>
                 <h3 className="mt-8 text-xl font-semibold text-ink">{title}</h3>
                 <p className="mt-3 leading-relaxed">{body}</p>
@@ -123,14 +132,50 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="relative overflow-hidden border-t border-rule">
+        <div className="lab-wash pointer-events-none absolute inset-0" aria-hidden="true" />
+        <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
+          <div className="relative">
+            <Decor name="question" className="absolute -top-6 right-2 w-14 sm:right-10 sm:w-20" />
+            <p className="eyebrow">Next experiment</p>
+            <h2 data-fx="type" className="display mt-4 text-[clamp(2.4rem,5.4vw,4.6rem)]">Got a task that eats your week?</h2>
+            <p data-fx="rise" className="mt-6 max-w-lg text-lg leading-relaxed">
+              Tell me about it. If a browser extension, a desktop app or a small internal tool can take it off your
+              plate, it is exactly the kind of thing this lab builds.
+            </p>
+            <div data-fx="rise" className="mt-8 flex flex-wrap gap-3">
+              <a href={`mailto:${CONTACT_EMAIL}?subject=Tool idea`} className="btn btn-brand">Pitch an idea</a>
+              <a href={PORTFOLIO_URL} target="_blank" rel="noopener noreferrer" className="btn btn-line">See my portfolio ↗</a>
+            </div>
+          </div>
+          <div className="relative mx-auto w-full max-w-[22rem] lg:max-w-none">
+            <Decor name="burst" className="absolute -right-4 top-4 w-28 opacity-90 sm:w-36" />
+            <div>
+              <img
+                data-fx="character"
+                data-on="scroll"
+                src={scientistReach}
+                alt="The lab's scientist reaching out with one hand and holding up a bubbling flask in the other"
+                width={760}
+                height={701}
+                loading="lazy"
+                draggable={false}
+                className="relative w-full select-none"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Author />
     </>
   )
 }
 
-function CategoryHead({ index, title, blurb }: { index: number; title: string; blurb: string }) {
+function CategoryHead({ index, title, blurb, sticker }: { index: number; title: string; blurb: string; sticker: Art }) {
   return (
-    <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr] lg:items-end">
+    <div className="relative grid gap-6 lg:grid-cols-[1.3fr_1fr] lg:items-end">
+      <Decor name={sticker} className="absolute -top-14 right-0 w-20 sm:w-28 lg:-top-20 lg:right-4 lg:w-32" />
       <div>
         <p className="eyebrow">Category 0{index}</p>
         <h2 data-fx="type" className="display mt-4 text-[clamp(2.6rem,6.5vw,5.8rem)]">{title}</h2>

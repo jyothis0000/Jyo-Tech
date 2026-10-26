@@ -1,4 +1,5 @@
 import type { ComponentType, CSSProperties, ReactNode } from 'react'
+import type { Art } from './components/Decor'
 import { CHROME_STORE_URL_STACKPICKER, CHROME_STORE_URL_WEBHARVEST, CONTACT_EMAIL } from './constants'
 import stackpickerIcon from './assets/stackpicker-icon.png'
 import webharvestIcon from './assets/webharvest-icon.png'
@@ -13,6 +14,7 @@ export interface Product {
   key: string
   category: 'extension' | 'software'
   brand: [string, string]
+  sticker: Art
   name: string
   path: string
   fig: string
@@ -39,6 +41,7 @@ export const products: Product[] = [
     key: 'stackpicker',
     category: 'extension',
     brand: ['#6366f1', '#38bdf8'],
+    sticker: 'atom',
     name: 'StackPicker',
     path: '/stackpicker',
     fig: 'Fig 1',
@@ -89,6 +92,7 @@ export const products: Product[] = [
     key: 'webharvest',
     category: 'extension',
     brand: ['#10b981', '#a3e635'],
+    sticker: 'splatGreen',
     name: 'WebHarvest',
     path: '/webharvest',
     fig: 'Fig 2',
@@ -139,6 +143,7 @@ export const products: Product[] = [
     key: 'bunny',
     category: 'software',
     brand: ['#a78bfa', '#5eead4'],
+    sticker: 'sparkles',
     name: 'Bunny',
     path: '/bunny',
     fig: 'Fig 3',

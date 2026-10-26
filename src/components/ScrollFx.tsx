@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText)
 //   card    product cards and figures lift into place as whole objects, once
 //   count   a number counts up to its value, once
 //   character  the scientist pops in on load (or on scroll with data-on="scroll"), idles, leans to the pointer
+//   float   lab stickers pop in on scroll, then drift and tilt
 //   depth   hero layers drift apart at different speeds as you leave the hero
 //   progress  a bar that fills with page progress
 const CHAR_SECONDS = 0.045
@@ -131,6 +132,16 @@ export default function ScrollFx() {
         el.addEventListener('pointerenter', jig)
         el.addEventListener('click', jig)
         restore.push(() => { el.removeEventListener('pointerenter', jig); el.removeEventListener('click', jig) })
+      })
+
+      // Lab stickers pop in when they come into view, then drift and tilt on their own slow clocks.
+      gsap.utils.toArray<HTMLElement>('[data-fx="float"]').forEach((el, i) => {
+        gsap.timeline({ scrollTrigger: { trigger: el, start: 'top 92%', once: true } })
+          .fromTo(el, { opacity: 0, scale: 0.4, rotate: -25 }, { opacity: 1, scale: 1, rotate: -5, duration: 0.9, ease: 'back.out(2)' })
+          .add(() => {
+            gsap.to(el, { y: -10 - (i % 3) * 4, duration: 2.2 + (i % 4) * 0.45, ease: 'sine.inOut', repeat: -1, yoyo: true })
+            gsap.to(el, { rotate: 6, duration: 3.1 + (i % 3) * 0.6, ease: 'sine.inOut', repeat: -1, yoyo: true })
+          })
       })
 
       gsap.utils.toArray<HTMLElement>('[data-depth]').forEach(el => {

@@ -2,6 +2,7 @@ import PageMeta from './PageMeta'
 import Datasheet from './Datasheet'
 import StoreButton from './StoreButton'
 import SmartLink from './SmartLink'
+import Decor from './Decor'
 import { brandStyle, type Product } from '../products'
 
 export default function ProductPage({ product: p }: { product: Product }) {
@@ -12,7 +13,8 @@ export default function ProductPage({ product: p }: { product: Product }) {
       <PageMeta title={p.name} description={p.lede} path={p.path} />
 
       <div className="brand-wash">
-      <header className="mx-auto w-full max-w-6xl px-4 pt-14 sm:px-6 sm:pt-20">
+      <header className="relative mx-auto w-full max-w-6xl px-4 pt-14 sm:px-6 sm:pt-20">
+        <Decor name={p.sticker} className="absolute right-4 top-10 w-20 sm:right-6 sm:w-28 lg:top-14 lg:w-36" />
         <div className="flex items-center gap-3">
           <img src={p.icon} alt="" width={36} height={36} className="h-9 w-9 rounded-lg" />
           <p className="eyebrow">{p.category === 'extension' ? 'Chrome extensions' : 'Software'} / {p.kind === 'Chrome extension' ? 'Extension' : p.kind} · v{p.version}</p>
