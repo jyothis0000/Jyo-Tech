@@ -65,7 +65,7 @@ export default function Home() {
             </div>
           </div>
 
-          <Decor name="atom" className="absolute left-[46%] top-24 hidden w-24 opacity-90 lg:block" />
+          <Decor name="bubbles" className="absolute left-[47%] top-28 hidden w-9 lg:block" />
           <Decor name="sparkles" className="absolute left-[40%] top-[58%] hidden w-10 lg:block" />
           <Decor name="bubbles" className="absolute bottom-24 right-6 w-10 sm:w-12" />
 
@@ -136,7 +136,7 @@ export default function Home() {
         <div className="lab-wash pointer-events-none absolute inset-0" aria-hidden="true" />
         <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
           <div className="relative">
-            <Decor name="question" className="absolute -top-6 right-2 w-14 sm:right-10 sm:w-20" />
+            <Decor name="question" className="absolute -top-4 right-4 w-8 sm:right-16 sm:w-10" />
             <p className="eyebrow">Next experiment</p>
             <h2 data-fx="type" className="display mt-4 text-[clamp(2.4rem,5.4vw,4.6rem)]">Got a task that eats your week?</h2>
             <p data-fx="rise" className="mt-6 max-w-lg text-lg leading-relaxed">
@@ -149,7 +149,7 @@ export default function Home() {
             </div>
           </div>
           <div className="relative mx-auto w-full max-w-[22rem] lg:max-w-none">
-            <Decor name="burst" className="absolute -right-4 top-4 w-28 opacity-90 sm:w-36" />
+            <Decor name="burst" className="absolute -left-2 bottom-6 w-12 sm:w-16" />
             <div>
               <img
                 data-fx="character"
@@ -174,13 +174,18 @@ export default function Home() {
 
 function CategoryHead({ index, title, blurb, sticker }: { index: number; title: string; blurb: string; sticker: Art }) {
   return (
-    <div className="relative grid gap-6 lg:grid-cols-[1.3fr_1fr] lg:items-end">
-      <Decor name={sticker} className="absolute -top-14 right-0 w-20 sm:w-28 lg:-top-20 lg:right-4 lg:w-32" />
+    <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr] lg:items-end">
       <div>
         <p className="eyebrow">Category 0{index}</p>
         <h2 data-fx="type" className="display mt-4 text-[clamp(2.6rem,6.5vw,5.8rem)]">{title}</h2>
       </div>
-      <p data-fx="rise" className="max-w-md leading-relaxed lg:justify-self-end">{blurb}</p>
+      <div className="relative isolate max-w-md lg:justify-self-end">
+        {/* Sits behind the description, faded, as a watermark. */}
+        <div className="pointer-events-none absolute -right-2 -top-10 -z-10 w-16 opacity-35 sm:w-20" aria-hidden="true">
+          <Decor name={sticker} className="w-full" />
+        </div>
+        <p data-fx="rise" className="relative leading-relaxed">{blurb}</p>
+      </div>
     </div>
   )
 }
