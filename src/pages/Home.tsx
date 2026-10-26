@@ -19,9 +19,9 @@ const proof: [string, string][] = [
 const reasonArt: Art[] = ['splatPink', 'bolt', 'splatGreen']
 
 const reasons: [string, string][] = [
-  ['Private by design', 'Every tool works on your own device. There is no account to create and no server of ours that sees what you browse, scan or type.'],
-  ['Useful in seconds', 'One click on a toolbar icon, one press of Scan page, one keyboard shortcut. No setup, no training, no dashboards to learn.'],
-  ['Exports your team already uses', 'Results copy straight into a spreadsheet, or save as CSV, JSON or Word for your CRM, catalogue or report.'],
+  ['Private by design', 'Every tool works on your own device. There is no account to create and no server of ours sitting between you and your work.'],
+  ['Useful in seconds', 'Install it and use it. No setup, no training and no dashboards to learn before it pays off.'],
+  ['Fits how you already work', 'Results land where you already work: your browser, your desktop, your spreadsheets and files.'],
 ]
 
 export default function Home() {
@@ -116,8 +116,8 @@ export default function Home() {
       <section className="border-t border-rule">
         <div className="mx-auto w-full max-w-6xl px-4 py-24 sm:px-6 lg:py-32">
           <div className="max-w-3xl">
-            <p className="eyebrow">Why teams use them</p>
-            <h2 data-fx="type" className="display mt-4 text-[clamp(2.4rem,5.5vw,4.6rem)]">Less copy-paste. Fewer tabs. Nothing leaked.</h2>
+            <p className="eyebrow">How the lab builds</p>
+            <h2 data-fx="type" className="display mt-4 text-[clamp(2.4rem,5.5vw,4.6rem)]">Built small. Kept private. Made to save time.</h2>
           </div>
           <div data-fx="rise" className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-rule md:grid-cols-3">
             {reasons.map(([title, body], i) => (
